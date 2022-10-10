@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="hahas">
+
+    </div>
+    <div id="boohoos">
+
+    </div>
+	<script>
+        // Reaction function to likes or jeers user actions
+        function reaction(type, put_url, elemID) {
+
+        // fetch the API
+        fetch(put_url, put_options)
+        // response is a RESTful "promise" on any successful fetch
+        .then(response => {
+        // check for response errors
+        if (response.status !== 200) {
+            error("PUT API response failure: " + response.status)
+            return;  // api failure
+        }
+        // valid response will have JSON data
+        response.json().then(data => {
+            console.log(data);
+            // Likes or Jeers updated/incremented
+            if (type === "HAHA") // like data element
+                document.getElementById(elemID).innerHTML = data.haha;  // fetched haha data assigned to haha Document Object Model (DOM)
+            else if (type === "BOOHOO") // jeer data element
+                document.getElementById(elemID).innerHTML = data.boohoo;  // fetched boohoo data assigned to boohoo Document Object Model (DOM)
+            else
+                error("unknown type: " + type);  // should never occur
+        })
+        })
+        // catch fetch errors (ie Nginx ACCESS to server blocked)
+        .catch(err => {
+        error(err + " " + put_url);
+        });
+
+        }
+    </script>
+  </body>
+</html>
