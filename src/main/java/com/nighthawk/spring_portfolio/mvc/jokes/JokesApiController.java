@@ -60,4 +60,18 @@ public class JokesApiController {
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+
+    @PutMapping("/share/{id}")
+    public ResponseEntity<Jokes> setShare(@PathVariable long id) {
+        Optional<Jokes> optional = repository.findById(id);
+        if (optional.isPresent()) {  // Good ID
+            Jokes joke = optional.get();
+            joke.setShare(joke.getShare()+1);
+            repository.save(joke);
+            return new ResponseEntity<>(joke, HttpStatus.OK);
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }
