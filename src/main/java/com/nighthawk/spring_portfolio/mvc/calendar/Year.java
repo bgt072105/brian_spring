@@ -44,4 +44,7 @@ class Year {
       year.setYear(2022);
       System.out.println(year);
    }
+   public String firstDayOfYearToString(int year){
+      return "{ \"year\": "  +year+  ", " + "\"firstDayOfYear\": "  + APCalendar.firstDayOfYear(year)  + " }";  
+   }
 }
