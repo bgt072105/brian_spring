@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Iterator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -92,6 +93,35 @@ public class Person {
             LocalDate birthDay = this.dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             return Period.between(birthDay, LocalDate.now()).getYears(); }
         return -1;
+    }
+
+    public void addDailySteps(int DailySteps, String Day){
+        if(stats.containsKey(Day)){
+            //if it does, take stats>Day>steps and add DailySteps to it
+            Map daysteps = stats.get(Day);
+            daysteps.replace("steps", (int) daysteps.get("steps") + DailySteps);
+            stats.replace(Day, daysteps);
+        }
+        else{
+            //if it doesn't, create a new Object with calories 0 steps DailySteps and put in stats at key Day
+            HashMap newDay = new HashMap();
+            newDay.put("calories", 0);
+            newDay.put("steps", DailySteps);
+        }
+    }
+
+    public int activeDays(){
+       return stats.size();
+    }
+
+    public int averageSteps(){
+        Iterator<Map.Entry<String, Map<String, Object>>> iter = stats.entrySet().iterator();
+        int totalSteps = 0;
+        while(iter.hasNext()){
+            Map.Entry<String, Map<String, Object>> entry = iter.next();
+            totalSteps+=(int)entry.getValue().get("steps");
+        }
+        return totalSteps/stats.size();
     }
 
 }
