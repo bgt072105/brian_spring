@@ -99,7 +99,7 @@ public class PersonApiController {
     @PostMapping(value = "/setStats", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Person> personStats(@RequestBody final Map<String,Object> stat_map) {
         // find ID
-        long id=Long.parseLong((String)stat_map.get("id"));  
+        long id=Long.valueOf(Integer.toString((int)stat_map.get("id")));  
         Optional<Person> optional = repository.findById((id));
         if (optional.isPresent()) {  // Good ID
             Person person = optional.get();  // value from findByID
@@ -116,11 +116,31 @@ public class PersonApiController {
             Map<String, Map<String, Object>> date_map = new HashMap<>();
             date_map.put( (String) stat_map.get("date"), attributeMap );
             System.out.println(attributeMap);
-            //person.setStats(date_map);  // BUG, needs to be customized to replace if existing or append if new
+            System.out.println(date_map);
+            for (Map.Entry<String,Map<String, Object>> entry : date_map.entrySet())  {
+                person.addDailySteps((int)entry.getValue().get("steps"), (int)entry.getValue().get("calories"), entry.getKey());
+            }
+            // person.setStats(date_map);  // BUG, needs to be customized to replace if existing or append if new
             repository.save(person);  // conclude by writing the stats updates
 
             // return Person with update Stats
             return new ResponseEntity<>(person, HttpStatus.OK);
+        }
+        // return Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+        
+    }
+
+    @GetMapping(value = "/getAverageSteps", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> getAverageSteps(@RequestBody final Map<String,Object> stat_map) {
+        // find ID
+        long id=Long.valueOf(Integer.toString((int)stat_map.get("id")));  
+        Optional<Person> optional = repository.findById((id));
+        if (optional.isPresent()) {  // Good ID
+            Person person = optional.get();  
+
+            // return Person with update Stats
+            return new ResponseEntity<>(person.averageSteps(), HttpStatus.OK);
         }
         // return Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
