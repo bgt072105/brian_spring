@@ -108,7 +108,7 @@ public class Calculator {
     }
 
     // Takes tokens and converts to Reverse Polish Notation (RPN), this is one where the operator follows its operands.
-    private void tokensToReversePolishNotation () {
+    private void tokensToReversePolishNotation () throws Exception {
         // contains final list of tokens in RPN
         this.reverse_polish = new ArrayList<>();
 
@@ -149,6 +149,9 @@ public class Calculator {
                 default:    // Default should be a number, there could be test here
                     this.reverse_polish.add(token);
             }
+        }
+        if(tokenStack.contains("(")){
+            throw new Exception("Imbalance of parentheses");
         }
         // Empty remaining tokens
         while (tokenStack.size() > 0) {
