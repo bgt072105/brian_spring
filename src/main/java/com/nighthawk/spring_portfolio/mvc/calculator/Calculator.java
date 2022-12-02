@@ -170,9 +170,25 @@ public class Calculator {
             if (isOperator(token))
             {
                 // Pop the two top entries
+                double firstval = calcStack.pop();
+                double secondval = calcStack.pop();
+                if(token == "+"){
+                    result = firstval + secondval;
+                } 
+                else if(token == "-"){
+                    result = firstval - secondval;
+                }
+                else if(token == "*"){
+                    result = firstval * secondval;
+                }
+                else if(token == "/"){
+                    result = firstval / secondval;
+                }
+                else if (token == "%"){
+                    result = firstval % secondval;
+                }
 
                 // Calculate intermediate results
-                result = 0.0;
 
                 // Push intermediate result back onto the stack
                 calcStack.push( result );
