@@ -24,6 +24,7 @@ public class Calculator {
     private final Map<String, Integer> OPERATORS = new HashMap<>();
     {
         // Map<"token", precedence>
+        OPERATORS.put("^", 2);
         OPERATORS.put("*", 3);
         OPERATORS.put("/", 3);
         OPERATORS.put("%", 3);
@@ -49,7 +50,13 @@ public class Calculator {
         this.termTokenizer();
 
         // place terms into reverse polish notation
-        this.tokensToReversePolishNotation();
+        try {
+            this.tokensToReversePolishNotation();
+        } catch (Exception e) {
+            System.out.println("error");
+            return;
+        }
+        
 
         // calculate reverse polish notation
         this.rpnToResult();
@@ -132,6 +139,7 @@ public class Calculator {
                 case "*":
                 case "/":
                 case "%":
+                case "^":
                     // While stack
                     // not empty AND stack top element
                     // and is an operator
@@ -173,28 +181,32 @@ public class Calculator {
             if (isOperator(token))
             {
                 // Pop the two top entries
-                double firstval = calcStack.pop();
+                double calculatedvalue = 0;
                 double secondval = calcStack.pop();
-                if(token == "+"){
-                    result = firstval + secondval;
+                double firstval = calcStack.pop();
+                if(token.equals("+")){
+                    calculatedvalue = firstval + secondval;
                 } 
-                else if(token == "-"){
-                    result = firstval - secondval;
+                else if(token.equals("-")){
+                    calculatedvalue = firstval - secondval;
                 }
-                else if(token == "*"){
-                    result = firstval * secondval;
+                else if(token.equals("*")){
+                    calculatedvalue = firstval * secondval;
                 }
-                else if(token == "/"){
-                    result = firstval / secondval;
+                else if(token.equals("/")){
+                    calculatedvalue = firstval / secondval;
                 }
-                else if (token == "%"){
-                    result = firstval % secondval;
+                else if (token.equals("%")){
+                    calculatedvalue = firstval % secondval;
+                }
+                else if (token.equals("^")){
+                    calculatedvalue = Math.pow(firstval, secondval);
                 }
 
                 // Calculate intermediate results
 
                 // Push intermediate result back onto the stack
-                calcStack.push( result );
+                calcStack.push( calculatedvalue );
             }
             // else the token is a number push it onto the stack
             else
@@ -240,5 +252,9 @@ public class Calculator {
         Calculator divisionMath = new Calculator("300/200");
         System.out.println("Division Math\n" + divisionMath);
 
+        System.out.println();
+
+        Calculator exponentMath = new Calculator("2^3");
+        System.out.println("Exponent Math\n" + exponentMath);
     }
 }
