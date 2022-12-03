@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <input type="text" id="input"></input>
+    <button onclick="calculator(document.getElementById('input').value)"></button>
+    <script>
+        function calculator(calculation){
+            fetch("/api/calculator/calculate", {"method": "GET"})
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                error("GET API response failure: " + response.status)
+                return;  // api failure
+            }
+            // valid response will have JSON data
+            response.json().then(data => {
+                console.log(data);
+            })
+            })
+            // catch fetch errors (ie Nginx ACCESS to server blocked)
+            .catch(err => {
+            error(err + " " );
+            });
+        }
+    </script>
+  </body>
+</html>

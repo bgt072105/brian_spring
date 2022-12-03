@@ -1,0 +1,34 @@
+package com.nighthawk.spring_portfolio.mvc.calculator;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+import java.text.SimpleDateFormat;
+
+@RestController
+@RequestMapping("/api/calculator")
+public class CalculatorApiController {
+    /*
+    #### RESTful API ####
+    Resource: https://spring.io/guides/gs/rest-service/
+    */
+
+
+    /*
+    GET calculation
+     */
+    @GetMapping("/calculate")
+    public ResponseEntity<Calculator> getPerson(@PathVariable String input) {
+        if (input.length() > 0) {  // Good ID
+            Calculator operator = new Calculator(input);
+            return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);       
+    }
+
+}
