@@ -6,11 +6,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
 import java.util.*;
 import java.text.SimpleDateFormat;
 
 @RestController
 @RequestMapping("/api/calculator")
+@JsonAutoDetect(getterVisibility=Visibility.NONE)
 public class CalculatorApiController {
     /*
     #### RESTful API ####
@@ -21,8 +25,8 @@ public class CalculatorApiController {
     /*
     GET calculation
      */
-    @GetMapping("/calculate")
-    public ResponseEntity<Calculator> getPerson(@PathVariable String input) {
+    @GetMapping("/calculate/{input}")
+    public ResponseEntity<Calculator> calculate(@PathVariable String input) {
         if (input.length() > 0) {  // Good ID
             Calculator operator = new Calculator(input);
             return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body

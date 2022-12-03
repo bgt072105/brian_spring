@@ -226,6 +226,10 @@ public class Calculator {
                 "Final result: " + String.format("%.2f", this.result));
     }
 
+    public double getResult() {
+        return this.result;
+    }
+
     // Tester method
     public static void main(String[] args) {
         // Random set of test cases
