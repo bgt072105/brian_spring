@@ -25,6 +25,7 @@ public class Calculator {
     {
         // Map<"token", precedence>
         OPERATORS.put("^", 2);
+        OPERATORS.put("sqrt", 2);
         OPERATORS.put("*", 3);
         OPERATORS.put("/", 3);
         OPERATORS.put("%", 3);
@@ -65,7 +66,7 @@ public class Calculator {
     // Test if token is an operator
     private boolean isOperator(String token) {
         // find the token in the hash map
-        return OPERATORS.containsKey(token);
+        return OPERATORS.containsKey(token.toLowerCase());
     }
 
     // Test if token is an separator
@@ -122,7 +123,7 @@ public class Calculator {
         // stack is used to reorder for appropriate grouping and precedence
         Stack<String> tokenStack = new Stack<String>();
         for (String token : tokens) {
-            switch (token) {
+            switch (token.toLowerCase()) {
                 // If left bracket push token on to stack
                 case "(":
                     tokenStack.push(token);
@@ -140,6 +141,7 @@ public class Calculator {
                 case "/":
                 case "%":
                 case "^":
+                case "sqrt":
                     // While stack
                     // not empty AND stack top element
                     // and is an operator
@@ -165,7 +167,7 @@ public class Calculator {
         while (tokenStack.size() > 0) {
             reverse_polish.add(tokenStack.pop());
         }
-
+        System.out.println(reverse_polish);
     }
 
     // Takes RPN and produces a final result
@@ -182,25 +184,30 @@ public class Calculator {
             {
                 // Pop the two top entries
                 double calculatedvalue = 0;
+                System.out.println(calcStack);
                 double secondval = calcStack.pop();
-                double firstval = calcStack.pop();
-                if(token.equals("+")){
-                    calculatedvalue = firstval + secondval;
-                } 
-                else if(token.equals("-")){
-                    calculatedvalue = firstval - secondval;
-                }
-                else if(token.equals("*")){
-                    calculatedvalue = firstval * secondval;
-                }
-                else if(token.equals("/")){
-                    calculatedvalue = firstval / secondval;
-                }
-                else if (token.equals("%")){
-                    calculatedvalue = firstval % secondval;
-                }
-                else if (token.equals("^")){
-                    calculatedvalue = Math.pow(firstval, secondval);
+                if (token.toLowerCase().equals("sqrt")) {
+                    calculatedvalue = Math.sqrt(secondval);
+                } else {
+                    double firstval = calcStack.pop();
+                    if(token.equals("+")){
+                        calculatedvalue = firstval + secondval;
+                    } 
+                    else if(token.equals("-")){
+                        calculatedvalue = firstval - secondval;
+                    }
+                    else if(token.equals("*")){
+                        calculatedvalue = firstval * secondval;
+                    }
+                    else if(token.equals("/")){
+                        calculatedvalue = firstval / secondval;
+                    }
+                    else if (token.equals("%")){
+                        calculatedvalue = firstval % secondval;
+                    }
+                    else if (token.equals("^")){
+                        calculatedvalue = Math.pow(firstval, secondval);
+                    }
                 }
 
                 // Calculate intermediate results

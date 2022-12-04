@@ -10,9 +10,11 @@
   <body>
     <input type="text" id="input"></input>
     <button onclick="calculator(document.getElementById('input').value)">Calculate</button>
+    <div id="result">
+    </div>
     <script>
         function calculator(calculation){
-            fetch("/api/calculator/calculate/"+calculation, {"method": "GET"})
+            fetch("/api/calculator/calculate/"+calculation.replace("/", "GG").replace("%", "AA"), {"method": "GET"})
             // response is a RESTful "promise" on any successful fetch
             .then(response => {
             // check for response errors
@@ -22,7 +24,7 @@
             }
             // valid response will have JSON data
             response.json().then(data => {
-                console.log(data);
+              document.getElementById("result").innerText=data.result;
             })
             })
             // catch fetch errors (ie Nginx ACCESS to server blocked)

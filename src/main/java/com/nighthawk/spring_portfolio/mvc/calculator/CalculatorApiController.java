@@ -28,7 +28,7 @@ public class CalculatorApiController {
     @GetMapping("/calculate/{input}")
     public ResponseEntity<Calculator> calculate(@PathVariable String input) {
         if (input.length() > 0) {  // Good ID
-            Calculator operator = new Calculator(input);
+            Calculator operator = new Calculator(input.replace("GG", "/").replace("AA", "%"));
             return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
         }
         // Bad ID
