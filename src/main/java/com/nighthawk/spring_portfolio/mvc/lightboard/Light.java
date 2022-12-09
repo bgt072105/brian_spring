@@ -45,10 +45,42 @@ public class Light {
     public Light() {
         int maxColor = 255;
         int effect = 9;
+        this.on = true;
         this.red = (short) (Math.random()*(maxColor+1));
         this.green = (short) (Math.random()*(maxColor+1));
         this.blue = (short) (Math.random()*(maxColor+1));
         this.effect = (short) (Math.random()*(effect+1));
+    }
+
+    public short getRed() {
+        if (this.on) {
+            return this.red;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public short getBlue() {
+        if (this.on) {
+            return this.blue;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public short getGreen() {
+        if (this.on) {
+            return this.green;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public void lightSwitch() {
+        this.on = !this.on;
     }
 
     public String getEffectTitle() {

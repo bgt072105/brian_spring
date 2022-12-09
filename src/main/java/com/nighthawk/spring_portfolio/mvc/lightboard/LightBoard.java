@@ -17,6 +17,10 @@ public class LightBoard {
         }
     }
 
+    public void lightSwitch(int row, int col) {
+        this.lights[row][col].lightSwitch();
+    }
+
     /* Output is intended for API key/values */
     public String toString() { 
         String outString = "[";
@@ -123,5 +127,13 @@ public class LightBoard {
         System.out.println(lightBoard);  // use toString() method
         System.out.println(lightBoard.toTerminal());
         System.out.println(lightBoard.toColorPalette());
+        // create and display LightBoard
+        LightBoard lightBoard2 = new LightBoard(6, 6);
+        for (int i = 0; i < 6; i++) {
+            lightBoard2.lightSwitch(2, i);
+        }
+        System.out.println(lightBoard2);  // use toString() method
+        System.out.println(lightBoard2.toTerminal());
+        System.out.println(lightBoard2.toColorPalette());
     }
 }
