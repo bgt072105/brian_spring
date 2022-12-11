@@ -52,6 +52,16 @@ public class Light {
         this.effect = (short) (Math.random()*(effect+1));
     }
 
+    public Light(double red, double green, double blue, double effect) {
+        int maxColor = 255;
+        int maxEffect = 9;
+        this.on = true;
+        this.red = (short) (red*(maxColor+1));
+        this.green = (short) (green*(maxColor+1));
+        this.blue = (short) (blue*(maxColor+1));
+        this.effect = (short) (effect*(maxEffect+1));
+    }
+
     public short getRed() {
         if (this.on) {
             return this.red;
