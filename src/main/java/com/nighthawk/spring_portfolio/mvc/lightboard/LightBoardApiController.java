@@ -13,7 +13,7 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 
 @RestController
-@RequestMapping("/api/calculator")
+@RequestMapping("/api/lightboard")
 @JsonAutoDetect(getterVisibility=Visibility.NONE)
 public class LightBoardApiController {
     /*
@@ -23,16 +23,16 @@ public class LightBoardApiController {
 
 
     /*
-    GET calculation
+    GET LightBoard
      */
-    @GetMapping("/calculate/{input}")
-    public ResponseEntity<Calculator> calculate(@PathVariable String input) {
-        if (input.length() > 0) {  // Good ID
-            Calculator operator = new Calculator(input.replace("GG", "/").replace("AA", "%"));
+    @GetMapping("/")
+    public ResponseEntity<LightBoard> LightBoard() {
+        try { 
+            LightBoard operator = new LightBoard(5, 5);
             return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);       
         }
-        // Bad ID
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);       
     }
 
 }
