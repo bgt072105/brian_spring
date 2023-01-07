@@ -1,16 +1,17 @@
 version: '3'
 services:
   web:
-    image: java_springv1
+    image: java_springv1_t9_tri2
     build: .
     ports:
-      - "8085:8080"
+      - "8209:8085"
     volumes:
       - persistent_volume:/app/volumes
+    restart: unless-stopped
 volumes:
   persistent_volume:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/ubuntu/spring_portfolio/volumes
+      device: /home/ubuntu/tri2/t9_csaspring8199/brian_spring/volumes
