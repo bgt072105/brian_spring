@@ -1,38 +1,53 @@
 package com.nighthawk.spring_portfolio.mvc.calculator;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.*;
-import java.text.SimpleDateFormat;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api/calculator")
-@JsonAutoDetect(getterVisibility=Visibility.NONE)
 public class CalculatorApiController {
-    /*
-    #### RESTful API ####
-    Resource: https://spring.io/guides/gs/rest-service/
-    */
-
 
     /*
-    GET calculation
+     * @GetMapping("/{expression}")
+     * public ResponseEntity<Calculator> getExpression(@PathVariable String
+     * expression) {
+     * // IMPORTANT: optional allow input null/no null value
+     * Calculator calculator_obj = new Calculator(expression);
+     * return new ResponseEntity<>(calculator_obj.toStringJson(), HttpStatus.OK); //
+     * OK HTTP response: status code, headers, and body
+     * 
+     * }
      */
-    @GetMapping("/calculate/{input}")
-    public ResponseEntity<Calculator> calculate(@PathVariable String input) {
-        if (input.length() > 0) {  // Good ID
-            Calculator operator = new Calculator(input.replace("GG", "/").replace("AA", "%"));
-            return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
-        }
-        // Bad ID
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);       
+
+    @GetMapping("/{expression}")
+    public ResponseEntity<JsonNode> getIsLeapYear(@PathVariable String expression)
+            throws JsonMappingException, JsonProcessingException {
+        // Backend Year Object
+        Calculator calculator_obj = new Calculator(expression);
+
+        // Turn Year Object into JSON
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode json = mapper.readTree(calculator_obj.toStringJson()); // this requires exception handling
+
+        return ResponseEntity.ok(json); // JSON response, see ExceptionHandlerAdvice for throws
+
     }
 
+    // add other methods
 }
+
+/**
+ * Calendar API
+ * Calendar Endpoint: /api/calendar/isLeapYear/2022, Returns:
+ * {"year":2020,"isLeapYear":false}
+ */
