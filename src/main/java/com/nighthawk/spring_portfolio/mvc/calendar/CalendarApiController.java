@@ -25,12 +25,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class CalendarApiController {
 
     @GetMapping("/isLeapYear/{year}")
-    public String calendar() {
+    public ResponseEntity<JsonNode> getIsLeapYear(@PathVariable int year) throws JsonMappingException, JsonProcessingException {
+      // Backend Year Object
+      Year year_obj = new Year();
+      year_obj.setYear(year);  // evaluates Leap Year
 
-        // load HTML VIEW (calendar.html)
-        return "calendar";
+      // Turn Year Object into JSON
+      ObjectMapper mapper = new ObjectMapper(); 
+      JsonNode json = mapper.readTree(year_obj.isLeapYearToString()); // this requires exception handling
 
+      return ResponseEntity.ok(json);  // JSON response, see ExceptionHandlerAdvice for throws
     }
+    
     @GetMapping("/firstDayOfYear/{year}")
     public ResponseEntity<JsonNode> getfirstDayOfYear(@PathVariable int year) throws
     JsonMappingException,
