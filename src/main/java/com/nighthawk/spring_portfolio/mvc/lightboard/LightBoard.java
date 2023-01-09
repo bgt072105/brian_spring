@@ -27,6 +27,11 @@ public class LightBoard {
         }
     }
 
+    /* Overload constructor to take in input Light[][] */
+    public LightBoard(Light[][] lights) {
+        this.lights = lights;
+    }
+
     public void lightSwitch(int row, int col) {
         this.lights[row][col].lightSwitch();
     }
