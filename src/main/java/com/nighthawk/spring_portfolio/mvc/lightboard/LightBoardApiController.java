@@ -45,18 +45,18 @@ public class LightBoardApiController {
         }
     }
     
-    @GetMapping("/simulate/{generations}")
-    public ResponseEntity<List<LightBoard>> getSimulation(@PathVariable("generations") int generations) {
-        List<LightBoard> lightBoardList = new ArrayList<LightBoard>();
-        LightBoard lightBoard = new LightBoard(5,5);
-        lightBoardList.add(lightBoard);
-        for (int i = 0; i < generations; i++) {
-            lightBoard = new LightBoard(lightBoard.nextGeneration());
-            // debug: print the lightBoard
-            System.out.println(lightBoard);
-            // add a copy of the lightBoard to the list
-            lightBoardList.add(lightBoard);
-        }
-        return new ResponseEntity<List<LightBoard>>(lightBoardList, HttpStatus.OK);
-    }
+    // @GetMapping("/simulate/{generations}")
+    // public ResponseEntity<List<LightBoard>> getSimulation(@PathVariable("generations") int generations) {
+    //     List<LightBoard> lightBoardList = new ArrayList<LightBoard>();
+    //     LightBoard lightBoard = new LightBoard(5,5);
+    //     lightBoardList.add(lightBoard);
+    //     for (int i = 0; i < generations; i++) {
+    //         lightBoard = new LightBoard(lightBoard.nextGeneration());
+    //         // debug: print the lightBoard
+    //         System.out.println(lightBoard);
+    //         // add a copy of the lightBoard to the list
+    //         lightBoardList.add(lightBoard);
+    //     }
+    //     return new ResponseEntity<List<LightBoard>>(lightBoardList, HttpStatus.OK);
+    // }
 }
