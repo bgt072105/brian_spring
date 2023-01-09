@@ -175,6 +175,130 @@ public class LightBoard {
 		return outString;
     }
 
+	/* Game of Life */
+	public Light[][] simulateLife() {
+        // 2D array nested loops, used for reference
+        for (int row = 0; row < lights.length; row++) {
+            for (int col = 0; col < lights[row].length; col++) {
+                // count neighbors
+                int neighbors = 0;
+                // check each neighbor
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        // skip self
+                        if (i == 0 && j == 0) continue;
+                        // check if neighbor is alive
+                        if (lights[(row + i + lights.length) % lights.length][(col + j + lights[row].length) % lights[row].length].getOn()) {
+                            neighbors++;
+                        }
+                    }
+                }
+                // apply rules
+                /*
+                * Any live cell with two or three live neighbours survives.
+                Any dead cell with three live neighbours becomes a live cell.
+                All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+                 * 
+                 */
+                if (lights[row][col].getOn()) {
+                    if (neighbors < 2 || neighbors > 3) {
+                        lights[row][col].setOn(false); // lambok method
+                    }
+                } else {
+                    if (neighbors == 3) {
+                        lights[row][col].setOn(true);
+                    }
+                }
+            }
+        }
+        return lights;
+    }
+
+    // Display game of life with getOn as on/off
+    public void displayLife() {
+        // 2D array nested loops, used for reference
+        for (int row = 0; row < lights.length; row++) {
+            for (int col = 0; col < lights[row].length; col++) {
+                System.out.print(lights[row][col].getOn() ? "O" : "X");
+            }
+            System.out.println();
+        }
+    }
+
+    // Display game of life with getOn as on/off
+    public void displayLifeColor() {
+        // 2D array nested loops, used for reference
+        for (int row = 0; row < lights.length; row++) {
+            for (int col = 0; col < lights[row].length; col++) {
+                if (lights[row][col].getOn()) {
+                    System.out.print("\033[38;2;" + 
+                    lights[row][col].getRed() + ";" +
+                    lights[row][col].getGreen() + ";" +
+                    lights[row][col].getBlue() + ";" +
+                    "7m" +
+                    "O" +
+                    "\033[m");
+                } else { // if not alive then don't print color
+                    System.out.print("X");
+                }
+                // System.out.print(
+                //     // reset
+                //     "\033[m" +
+                //     // color
+                //     "\033[38;2;" + 
+                //     lights[row][col].getRed() + ";" +
+                //     lights[row][col].getGreen() + ";" +
+                //     lights[row][col].getBlue() + ";" +
+                //     "7m" +
+                //     // data
+                //     (lights[row][col].getOn() ? "O" : "X") +
+                //     // reset
+                //     "\033[m"
+                // );
+            }
+            System.out.println();
+        }
+    }
+
+    // next generation returns next generation of lights 
+    public Light[][] nextGeneration() {
+        // 2D array nested loops, used for reference
+        for (int row = 0; row < lights.length; row++) {
+            for (int col = 0; col < lights[row].length; col++) {
+                // count neighbors
+                int neighbors = 0;
+                // check each neighbor
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        // skip self
+                        if (i == 0 && j == 0) continue;
+                        // check if neighbor is alive
+                        if (lights[(row + i + lights.length) % lights.length][(col + j + lights[row].length) % lights[row].length].getOn()) {
+                            neighbors++;
+                        }
+                    }
+                }
+                // apply rules
+                /*
+                * Any live cell with two or three live neighbours survives.
+                Any dead cell with three live neighbours becomes a live cell.
+                All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+                 * 
+                 */
+                if (lights[row][col].getOn()) {
+                    if (neighbors < 2 || neighbors > 3) {
+                        lights[row][col].setOn(false); // lambok method
+                    }
+                } else {
+                    if (neighbors == 3) {
+                        lights[row][col].setOn(true);
+                    }
+                }
+            }
+        }
+        return lights;
+    }
+
     static public void main(String[] args) {
         // create and display LightBoard
         LightBoard lightBoard = new LightBoard(5, 5);
