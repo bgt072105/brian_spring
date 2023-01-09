@@ -35,6 +35,16 @@ public class LightBoardApiController {
         }
     }
     
+    @GetMapping("/create/{width}/{length}")
+    public ResponseEntity<LightBoard> LightBoard() {
+        try { 
+            LightBoard operator = new LightBoard(width, length);
+            return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);       
+        }
+    }
+    
     @GetMapping("/simulate/{generations}")
     public ResponseEntity<List<LightBoard>> getSimulation(@PathVariable("generations") int generations) {
         List<LightBoard> lightBoardList = new ArrayList<LightBoard>();
