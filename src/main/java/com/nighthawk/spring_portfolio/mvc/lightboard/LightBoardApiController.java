@@ -38,6 +38,8 @@ public class LightBoardApiController {
     @GetMapping("/create/{width}/{length}")
     public ResponseEntity<LightBoard> LightBoard() {
         try { 
+            int width = Integer.parseInt(width);
+            int length = Integer.parseInt(length);
             LightBoard operator = new LightBoard(width, length);
             return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
         } catch (Exception e) {
