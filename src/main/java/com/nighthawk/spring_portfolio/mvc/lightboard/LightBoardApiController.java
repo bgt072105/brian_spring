@@ -34,5 +34,29 @@ public class LightBoardApiController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);       
         }
     }
-
+    
+    @GetMapping("/create/{width}/{length}")
+    public ResponseEntity<LightBoard> LightBoard(@PathVariable("width") int width, @PathVariable("length") int length) {
+        try { 
+            LightBoard operator = new LightBoard(width, length);
+            return new ResponseEntity<>(operator, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);       
+        }
+    }
+    
+    // @GetMapping("/simulate/{generations}")
+    // public ResponseEntity<List<LightBoard>> getSimulation(@PathVariable("generations") int generations) {
+    //     List<LightBoard> lightBoardList = new ArrayList<LightBoard>();
+    //     LightBoard lightBoard = new LightBoard(5,5);
+    //     lightBoardList.add(lightBoard);
+    //     for (int i = 0; i < generations; i++) {
+    //         lightBoard = new LightBoard(lightBoard.nextGeneration());
+    //         // debug: print the lightBoard
+    //         System.out.println(lightBoard);
+    //         // add a copy of the lightBoard to the list
+    //         lightBoardList.add(lightBoard);
+    //     }
+    //     return new ResponseEntity<List<LightBoard>>(lightBoardList, HttpStatus.OK);
+    // }
 }
