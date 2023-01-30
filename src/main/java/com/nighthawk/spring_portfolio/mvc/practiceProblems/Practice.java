@@ -61,7 +61,7 @@ public class Practice {
         this.Topic=Topic;
     }
 
-    public void setTags(int Tags) {
+    public void setTags(String Tags) {
         this.Tags=Tags;
     }
 }

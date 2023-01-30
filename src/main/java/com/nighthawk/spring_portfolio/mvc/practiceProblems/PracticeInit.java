@@ -19,7 +19,7 @@ public class PracticeInit {
             // Fail safe data validations
 
             // starting jokes
-            final String[] jokesArray = {
+            final String[] ProblemsArray = {
                 "If you give someone a program... you will frustrate them for a day; if you teach them how to program... you will frustrate them for a lifetime.",
                 "Q: Why did I divide sin by tan? A: Just cos.",
                 "UNIX is basically a simple operating system... but you have to be a genius to understand the simplicity.",
@@ -41,10 +41,10 @@ public class PracticeInit {
             };
 
             // make sure Joke database is populated with starting jokes
-            for (String joke : jokesArray) {
-                List<Practice> test = repository.findByJokeIgnoreCase(joke);  // JPA lookup
+            for (String Problems : ProblemsArray) {
+                List<Practice> test = repository.findByProblemsIgnoreCase(Problems);  // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Practice(null, joke, 0, 0, 0)); //JPA save
+                    repository.save(new Practice(null, Problems, 0, 0, 0)); //JPA save
             }
             
         };
