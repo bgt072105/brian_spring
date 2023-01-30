@@ -18,50 +18,50 @@ public class Practice {
     private String Topic ;
 
     @Column
-    private String tags;
+    private String Tags;
 
     private Practice() {   
 
     }
 
-    protected Practice(Long id, String Problem, int Unit, String Topic, String tags) {
-        if (joke == null) throw new NullPointerException("joke");
-        this.haha = haha;
-        this.boohoo = boohoo;
-        System.out.println(joke);
-        this.joke = joke;
-        this.share = share;
+    protected Practice(Long id, String Problem, int Unit, String Topic, String Tags) {
+        if (Problem == null) throw new NullPointerException("Problem");
+        this.Unit = Unit;
+        this.Topic = Topic;
+        System.out.println(Problem);
+        this.Problem = Problem;
+        this.Tags = Tags;
     }
 
-    public String getJoke() {
-        return this.joke;
+    public String getProblem() {
+        return this.Problem;
     }
 
-    public int getHaha() {
-        return this.haha;
+    public int getUnit() {
+        return this.Unit;
     }
 
-    public int getBoohoo() {
-        return this.boohoo;
+    public String getTopic() {
+        return this.Topic;
     }
 
-    public int getShare() {
-        return this.share;
+    public String getTags() {
+        return this.Tags;
     }
 
-    public void setJoke(String joke) {
-        this.joke=joke;
+    public void setProblem(String Problem) {
+        this.Problem=Problem;
     }
 
-    public void setHaha(int haha) {
-        this.haha=haha;
+    public void setUnit(int Unit) {
+        this.Unit=Unit;
     }
 
-    public void setBoohoo(int boohoo) {
-        this.boohoo=boohoo;
+    public void setTopic(String Topic) {
+        this.Topic=Topic;
     }
 
-    public void setShare(int share) {
-        this.share=share;
+    public void setTags(int Tags) {
+        this.Tags=Tags;
     }
 }
