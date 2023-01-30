@@ -14,37 +14,21 @@ public class PracticeInit {
     @Autowired PracticeJpaRepository repository;
     
     @Bean
-    CommandLineRunner run() {  // The run() method will be executed after the application starts
+    CommandLineRunner runPractice() {  // The run() method will be executed after the application starts
         return args -> {
             // Fail safe data validations
 
             // starting jokes
-            final String[] ProblemsArray = {
-                "If you give someone a program... you will frustrate them for a day; if you teach them how to program... you will frustrate them for a lifetime.",
-                "Q: Why did I divide sin by tan? A: Just cos.",
-                "UNIX is basically a simple operating system... but you have to be a genius to understand the simplicity.",
-                "Enter any 11-digit prime number to continue.",
-                "If at first you don't succeed; call it version 1.0.",
-                "Java programmers are some of the most materialistic people I know, very object-oriented",
-                "The oldest computer can be traced back to Adam and Eve. It was an apple but with extremely limited memory. Just 1 byte. And then everything crashed.",
-                "Q: Why did Wi-Fi and the computer get married? A: Because they had a connection",
-                "Bill Gates teaches a kindergarten class to count to ten. 1, 2, 3, 3.1, 95, 98, ME, 2000, XP, Vista, 7, 8, 10.",
-                "Q: What’s a aliens favorite computer key? A: the space bar!",
-                "There are 10 types of people in the world: those who understand binary, and those who don’t.",
-                "If it wasn't for C, we’d all be programming in BASI and OBOL.",
-                "Computers make very fast, very accurate mistakes.",
-                "Q: Why is it that programmers always confuse Halloween with Christmas? A: Because 31 OCT = 25 DEC.",
-                "Q: How many programmers does it take to change a light bulb? A: None. It’s a hardware problem.",
-                "The programmer got stuck in the shower because the instructions on the shampoo bottle said: Lather, Rinse, Repeat.",
-                "Q: What is the biggest lie in the entire universe? A: I have read and agree to the Terms and Conditions.",
-                "An SQL statement walks into a bar and sees two tables. It approaches, and asks may I join you?"
+            final String[] problemsArray = {
+                "Two students, S1 and S2, are rushing to class. They are waiting for green light at the same intersection. As soon as the light turns green, both students start walking with constant acceleration. The acceleration of student S1 is a1, and the acceleration of student S2 is a2, When student S1 has reached a velocity v1, she has walked a distance D1, while student S2 has walked a distance D2 = 1/3D1. In terms of v1 and D1, what is the correct expression for a2, the acceleration of student S2?",
+                "Copenhagen is located 780 km North and 810 km East of Paris. A flight from Paris to Copenhagen takes two hours. Typically the wind blows from East to West over Europe, but the speed varies. For one particular flight, the wind speed was 165 km/h. What is the magnitude of vpa, the plane's velocity with respect to the air?",
             };
 
             // make sure Joke database is populated with starting jokes
-            for (String Problems : ProblemsArray) {
-                List<Practice> test = repository.findByProblemsIgnoreCase(Problems);  // JPA lookup
+            for (String problems : problemsArray) {
+                List<Practice> test = repository.findByProblemIgnoreCase(problems);  // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Practice(null, Problems, 0, 0, 0)); //JPA save
+                    repository.save(new Practice(null, problems, 1, "1.1 Newton's Laws", "physics, newton's laws, force, mass, acceleration")); //JPA save
             }
             
         };

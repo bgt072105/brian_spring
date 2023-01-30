@@ -9,7 +9,7 @@ public class Practice {
     private Long id;
 
     @Column(unique=true)
-    private String Problem;
+    private String problem;
     
     @Column
     private int Unit;
@@ -24,17 +24,17 @@ public class Practice {
 
     }
 
-    protected Practice(Long id, String Problem, int Unit, String Topic, String Tags) {
-        if (Problem == null) throw new NullPointerException("Problem");
+    protected Practice(Long id, String problem, int Unit, String Topic, String Tags) {
+        if (problem == null) throw new NullPointerException("problem");
         this.Unit = Unit;
         this.Topic = Topic;
-        System.out.println(Problem);
-        this.Problem = Problem;
+        System.out.println(problem);
+        this.problem = problem;
         this.Tags = Tags;
     }
 
     public String getProblem() {
-        return this.Problem;
+        return this.problem;
     }
 
     public int getUnit() {
@@ -49,8 +49,8 @@ public class Practice {
         return this.Tags;
     }
 
-    public void setProblem(String Problem) {
-        this.Problem=Problem;
+    public void setProblem(String problem) {
+        this.problem=problem;
     }
 
     public void setUnit(int Unit) {

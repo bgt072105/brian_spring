@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController // annotation to simplify the creation of RESTful web services
-@RequestMapping("/api/Problems")  // all requests in file begin with this URI
+@RequestMapping("/api/problems")  // all requests in file begin with this URI
 public class PracticeApiController {
 
     // Autowired enables Control to connect URI request and POJO Object to easily for Database CRUD operations
@@ -37,10 +37,10 @@ public class PracticeApiController {
         */
         Optional<Practice> optional = repository.findById(id);
         if (optional.isPresent()) {  // Good ID
-            Practice Problems = optional.get();  // value from findByID
-            Problems.setUnit(Problems.getUnit()+1); // increment value
-            repository.save(Problems);  // save entity
-            return new ResponseEntity<>(Problems, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
+            Practice problems = optional.get();  // value from findByID
+            problems.setUnit(problems.getUnit()+1); // increment value
+            repository.save(problems);  // save entity
+            return new ResponseEntity<>(problems, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // Failed HTTP response: status code, headers, and body
@@ -52,10 +52,10 @@ public class PracticeApiController {
     public ResponseEntity<Practice> setJeer(@PathVariable long id) {
         Optional<Practice> optional = repository.findById(id);
         if (optional.isPresent()) {  // Good ID
-            Practice Problems = optional.get();
-            Problems.setTopic(Problems.getTopic()+1);
-            repository.save(Problems);
-            return new ResponseEntity<>(Problems, HttpStatus.OK);
+            Practice problems = optional.get();
+            problems.setTopic(problems.getTopic()+1);
+            repository.save(problems);
+            return new ResponseEntity<>(problems, HttpStatus.OK);
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -66,10 +66,10 @@ public class PracticeApiController {
     public ResponseEntity<Practice> setTags(@PathVariable long id) {
         Optional<Practice> optional = repository.findById(id);
         if (optional.isPresent()) {  // Good ID
-            Practice Problems = optional.get();
-            Problems.setTags(Problems.getTags()+1);
-            repository.save(Problems);
-            return new ResponseEntity<>(Problems, HttpStatus.OK);
+            Practice problems = optional.get();
+            problems.setTags(problems.getTags()+1);
+            repository.save(problems);
+            return new ResponseEntity<>(problems, HttpStatus.OK);
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
