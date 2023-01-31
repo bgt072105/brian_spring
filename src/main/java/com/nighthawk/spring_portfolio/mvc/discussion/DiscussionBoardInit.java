@@ -15,7 +15,7 @@ public class DiscussionBoardInit {
     DiscussionBoardJpaRepository repository;
 
     @Bean
-    CommandLineRunner runPractice() { // The run() method will be executed after the application starts
+    CommandLineRunner runDiscussionBoard() { // The run() method will be executed after the application starts
         return args -> {
             // Fail safe data validations
 
