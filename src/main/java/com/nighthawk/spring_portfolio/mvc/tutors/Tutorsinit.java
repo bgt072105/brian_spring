@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class Tutorsinit {
 
-    private static final String Location = null;
     // Inject repositories
     @Autowired
     TutorsJpaRepository repository;

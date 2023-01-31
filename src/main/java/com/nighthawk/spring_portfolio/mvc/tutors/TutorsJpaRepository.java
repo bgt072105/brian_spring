@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TutorsJpaRepository extends JpaRepository<Tutors, Long> {
     // JPA has many built in methods, these few have been prototyped for this
     // application
-    S save(Tutors tutor);
+    void String(Tutors tutor);
 
     // A
     List<Tutors> findByTutorsIgnoreCase(String tutor); // look to see if Joke(s) exist
