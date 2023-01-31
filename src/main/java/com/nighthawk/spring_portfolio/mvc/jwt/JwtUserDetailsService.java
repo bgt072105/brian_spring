@@ -22,6 +22,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (person != null) {
 			return new User(person.getEmail(), person.getPassword(),
 					new ArrayList<>());
+					// if ("admin".equals(username)) {
+					// 	return new User("admin", "$2a$10$NLAdhN1Leq00pVjoP1Br3OHy3eyDXR.modOhp3drN634TQTNh4vkq",
+					// 	new ArrayList<>());
 		} else {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
