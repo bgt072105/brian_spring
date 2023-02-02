@@ -72,14 +72,21 @@ public class JwtApiController {
 
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@RequestBody final Map<String, String> map) {
+
+		// check if user exists
+		if (personDetailsService.loadUserByUsername(map.get("email")) != null) {
+			throw new RuntimeException("User already exists");
+		}
 		
 		// extract term from RequestEntity
     String email = (String) map.get("email");
 		String password = (String) map.get("password");
 		String name = (String) map.get("name");
 		String dob_str = (String) map.get("dob");
+
+			Date dob = null;
 		try {  // All data that converts formats could fail
-      Date dob = new SimpleDateFormat("MM-dd-yyyy").parse(dob_str);
+      dob = new SimpleDateFormat("MM-dd-yyyy").parse(dob_str);
     } catch (Exception e) {
       // no actions as dob default is good enough
     }
