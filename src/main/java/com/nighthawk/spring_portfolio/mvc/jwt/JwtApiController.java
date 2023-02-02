@@ -85,8 +85,8 @@ public class JwtApiController {
     }
 		
 		Person person = new Person(email, encoder.encode(password), name, dob);
-		
-		personDetailsService.save(RegisterRequest);
+
+		personDetailsService.save(person);
 		return ResponseEntity.ok().build();
 	}
 
