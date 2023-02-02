@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
@@ -29,6 +30,19 @@ public class JwtApiController {
 
 	@Autowired
 	private PersonDetailsService personDetailsService;
+
+	@Autowired
+	private PasswordEncoder encoder;
+
+	@PostMapping("/register")
+	public ResponseEntity<?> registerUser(@RequestBody Person RegisterRequest) throws Exception {
+		if (personDetailsService.loadUserByUsername(RegisterRequest.getEmail()) != null) {
+			throw new Exception("User already exists");
+		}
+		Person person = new Person(RegisterRequest.getEmail(), encoder.encode(RegisterRequest.getPassword()), RegisterRequest.getName(), RegisterRequest.getDob());
+		personDetailsService.save(person);
+		return ResponseEntity.ok().build();
+	}
 
 	@PostMapping("/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
