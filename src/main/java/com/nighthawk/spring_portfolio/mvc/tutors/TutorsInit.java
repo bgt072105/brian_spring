@@ -15,7 +15,7 @@ public class TutorsInit {
     TutorsJpaRepository repository;
 
     @Bean
-    CommandLineRunner run() { // The run() method will be executed after the application starts
+    CommandLineRunner run1() { // The run() method will be executed after the application starts
         return args -> {
             // Fail safe data validations
 
@@ -60,7 +60,7 @@ public class TutorsInit {
 
             // make sure Joke database is populated with starting jokes
             for (String tutor : tutorsArray) {
-                List<Tutors> test = repository.findByTutorsIgnoreCase(tutor); // JPA lookup
+                List<Tutors> test = repository.findByTutorIgnoreCase(tutor); // JPA lookup
 
                 // UNCOMMENT TO CLEAR DATABASE
                 // if (test.size() > 0) {
