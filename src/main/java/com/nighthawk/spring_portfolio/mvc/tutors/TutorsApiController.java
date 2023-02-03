@@ -47,7 +47,7 @@ public class TutorsApiController {
         Optional<Tutors> optional = repository.findById(id);
         if (optional.isPresent()) { // Good ID
             Tutors tutor = optional.get(); // value from findByID
-            tutor.setLike(tutor.getLike() + 1); // increment value
+            tutor.setlocation(tutor.getlocation() + 1); // increment value
             repository.save(tutor); // save entity
             return new ResponseEntity<>(tutor, HttpStatus.OK); // OK HTTP response: status code, headers, and body
         }
@@ -58,12 +58,50 @@ public class TutorsApiController {
     /*
      * Update Dislike
      */
-    @PutMapping("/dislike/{id}")
-    public ResponseEntity<Tutors> setDislike(@PathVariable long id) {
+    @PutMapping("/experience/{id}")
+    public ResponseEntity<Tutors> setexperience(@PathVariable long id) {
         Optional<Tutors> optional = repository.findById(id);
         if (optional.isPresent()) { // Good ID
             Tutors tutor = optional.get();
-            tutor.setDislike(tutor.getDislike() + 1);
+            tutor.setexperience(tutor.getexperience() + 1);
+            repository.save(tutor);
+            return new ResponseEntity<>(tutor, HttpStatus.OK);
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/location/{id}")
+    public ResponseEntity<Tutors> setlocation(@PathVariable long id) {
+        Optional<Tutors> optional = repository.findById(id);
+        if (optional.isPresent()) { // Good ID
+            Tutors tutor = optional.get();
+            tutor.setlocation(tutor.getlocation() + 1);
+            repository.save(tutor);
+            return new ResponseEntity<>(tutor, HttpStatus.OK);
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/review/{id}")
+    public ResponseEntity<Tutors> setreview(@PathVariable long id) {
+        Optional<Tutors> optional = repository.findById(id);
+        if (optional.isPresent()) { // Good ID
+            Tutors tutor = optional.get();
+            tutor.setreviews(tutor.getreviews() + 1);
+            repository.save(tutor);
+            return new ResponseEntity<>(tutor, HttpStatus.OK);
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    @PutMapping("/meetingpreference/{id}")
+    public ResponseEntity<Tutors> setmeetingpreference(@PathVariable long id) {
+        Optional<Tutors> optional = repository.findById(id);
+        if (optional.isPresent()) { // Good ID
+            Tutors tutor = optional.get();
+            tutor.setmeetingpreference(tutor.getmeetingpreference() + 1);
             repository.save(tutor);
             return new ResponseEntity<>(tutor, HttpStatus.OK);
         }

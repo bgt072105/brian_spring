@@ -19,7 +19,84 @@ public class Tutors {
 
     @Column(unique = true)
     private String tutor; // The Joke
+    private String location;
+    private String experience;
+    private String reviews;
+    private String meetingpreference;
 
-    private int like; // Store joke likes
-    private int dislike; // Store joke jeers
+    public String getlocation() {
+        return this.location;
+    }
+
+    public String getTutors() {
+        return this.tutor;
+    }
+
+    public String getexperience() {
+        return this.experience;
+    }
+
+    public String getreviews() {
+        return this.reviews;
+    }
+
+    public String getmeetingpreference() {
+        return this.meetingpreference;
+    }
+
+    public void setTutors(String tutor) {
+        this.tutor = tutor;
+    }
+
+    public void setlocation(String location) {
+        this.location = location;
+    }
+
+    public void setexperience(String experience) {
+        this.experience = experience;
+    }
+
+    public void setreviews(String reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setmeetingpreference(String meetingpreference) {
+        this.meetingpreference = meetingpreference;
+    }
 }
+
+// public String getTutors() {
+// return this.tutor;
+// }
+
+// public String getlocation() {
+// return this.location;
+// }
+
+// public String getexperience() {
+// return this.experience;
+// }
+
+// public String getreviews() {
+// return this.reviews;
+// }
+
+// public String getmeetingpreference() {
+// return this.meetingpreference;
+// }
+//
+// public void setTutors(String tutor) {
+// this.tutor = tutor;
+// }
+
+// public void setlocation(String location) {
+// this.location = location;
+// }
+
+// public void setexperience(String experience) {
+// this.experience = experience;
+// }
+
+// public void setreviews(String reviews) {
+// this.reviews = reviews;
+// }
