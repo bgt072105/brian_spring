@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TutorsJpaRepository extends JpaRepository<Tutors, Long> {
     // JPA has many built in methods, these few have been prototyped for this
     // application
-    void save(Tutors tutor);
+    void save(String Tutor);
 
     // A
     List<Tutors> findAllByOrderByTutorAsc(); // returns a List of Jokes in Ascending order
