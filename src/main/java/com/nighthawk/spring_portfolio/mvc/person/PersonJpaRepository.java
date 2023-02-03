@@ -22,6 +22,7 @@ public interface PersonJpaRepository extends JpaRepository<Person, Long> {
        https://springframework.guru/spring-data-jpa-query/
        https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods
      */
+    Person findByEmailAndPassword(String email, String password);
 
     // Custom JPA query
     @Query(
