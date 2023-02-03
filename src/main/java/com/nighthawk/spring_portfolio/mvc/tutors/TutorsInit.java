@@ -28,7 +28,6 @@ public class TutorsInit {
                     "Ellen",
             };
 
-            // make sure Joke database is populated with starting jokes
             for (String tutor : tutorsArray) {
                 List<Tutors> test = repository.findByTutorIgnoreCase(tutor); // JPA lookup
 
@@ -38,7 +37,7 @@ public class TutorsInit {
                 // }
 
                 if (test.size() == 0)
-                    repository.save(new Tutors(id: , tutor, null, equation, 0, 0)); // JPA save
+                    repository.save(new Tutors(id: , tutor, null, 0, 0)); // JPA save
             }
 
         };
