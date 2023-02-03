@@ -24,11 +24,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 * To enable HTTP Security in Spring, extend the WebSecurityConfigurerAdapter. 
 */
 @Configuration
-@EnableWebSecurity  // Beans to enable basic Web security
+@EnableWebSecurity // Beans to enable basic Web security
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	@Autowired
@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
-    
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		// configure AuthenticationManager so that it knows from where to load
@@ -56,16 +56,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-    // Provide a default configuration using configure(HttpSecurity http)
+	// Provide a default configuration using configure(HttpSecurity http)
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // httpSecurity.csrf().disable();
+		// httpSecurity.csrf().disable();
 		httpSecurity
-		        // We don't need CSRF for this example
-                .csrf().disable()
+				// We don't need CSRF for this example
+				.csrf().disable()
 				// don't authenticate this particular request
 				.authorizeRequests().antMatchers("/authenticate").permitAll()
 				.antMatchers("/register").permitAll()
+				.antMatchers("/api/**").permitAll()
 				// all other requests need to be authenticated
 				.anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to
