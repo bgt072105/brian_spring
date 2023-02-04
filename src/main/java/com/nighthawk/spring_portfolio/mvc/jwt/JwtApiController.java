@@ -74,9 +74,9 @@ public class JwtApiController {
 	public ResponseEntity<?> registerUser(@RequestBody final Map<String, String> map) {
 
 		// check if user exists
-		if (personDetailsService.loadUserByUsername(map.get("email")) != null) {
-			throw new RuntimeException("User already exists");
-		}
+		// if (personDetailsService.loadUserByUsername(map.get("email")) != null) {
+		// 	throw new RuntimeException("User already exists");
+		// }
 		
 		// extract term from RequestEntity
     String email = (String) map.get("email");
