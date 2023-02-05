@@ -22,7 +22,7 @@ public class TutorInit {
 
             // 2d array for names and graduating year
             final String[][] peopleArray = {
-                    { "Don Tran", "19", "donqt15@gmail.com", "online" },
+                    { "Don Tran", "donqt15@gmail.com", "online" },
                     { "Krish Patil", "19", "n/a", "n/a" },
                     { "Bailey Say", "19", "n/a", "n/a" },
                     { "Rohan Gaikwad", "19", "n/a", "n/a" },
@@ -35,12 +35,11 @@ public class TutorInit {
             // make sure people array database is populated with starting values for members
             for (int i = 0; i < peopleArray.length; i++) {
                 String name = peopleArray[i][0];
-                int age = Integer.parseInt(peopleArray[i][1]);
-                String email = peopleArray[i][2];
-                String meetingpreference = peopleArray[i][3];
+                String email = peopleArray[i][1];
+                String meetingpreference = peopleArray[i][2];
                 List<Tutor> test = repository.findByNameIgnoreCase(name); // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Tutor(null, name, "", new ArrayList<String>(), age, email,
+                    repository.save(new Tutor(null, name, "", new ArrayList<String>(), email,
                             meetingpreference)); // JPA save
             }
 

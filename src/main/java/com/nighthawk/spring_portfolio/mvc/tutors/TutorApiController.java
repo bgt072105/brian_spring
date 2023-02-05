@@ -114,7 +114,6 @@ public class TutorApiController {
         // updates data for student
         tutor.setName(newTutorDetails.getName());
         tutor.setPasswordHash(newTutorDetails.getPasswordHash());
-        tutor.setAge(newTutorDetails.getAge());
         tutor.setEmail(newTutorDetails.getEmail());
         tutor.setMeetingpreference(newTutorDetails.getMeetingpreference());
 

@@ -29,9 +29,6 @@ public class Tutor {
     // Stores list of events that each student has
     private ArrayList<String> experience = new ArrayList<String>();
 
-    // Stores age 
-    private int age;
-
     // Stores email
     @Column(nullable = false, unique = true, length = 45)
     private String email;
@@ -41,14 +38,14 @@ public class Tutor {
 
     // delombok: class definition
     public Tutor(Long id, String name, String passwordHash, ArrayList<String> experience,
-            int age, String email,
+            String email,
             String meetingpreference) {
         this.id = id;
         this.name = name;
         this.passwordHash = passwordHash;
         if (this.experience != null)
             this.experience = experience;
-        this.age = age;
+
         this.email = email;
         this.meetingpreference = meetingpreference;
     }
@@ -105,14 +102,6 @@ public class Tutor {
         this.experience.add(experience);
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -133,7 +122,7 @@ public class Tutor {
     @Override
     public String toString() {
         return "Tutor [id=" + id + ", name=" + name + ",  experience=" + experience
-                + ", age=" + age + ", email=" + email + ", meetingpreference=" + meetingpreference + "]";
+                + ", email=" + email + ", meetingpreference=" + meetingpreference + "]";
     }
 
     // data: check if equal for anything (not in use)
@@ -171,9 +160,7 @@ public class Tutor {
                 return false;
         } else if (!experience.equals(other.experience))
             return false;
-        if (age != other.age)
-            return false;
-        return true;
+        return false;
     }
 
     // creates hash (not in use)
@@ -184,7 +171,6 @@ public class Tutor {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((experience == null) ? 0 : experience.hashCode());
-        result = prime * result + age;
         return result;
     }
 }

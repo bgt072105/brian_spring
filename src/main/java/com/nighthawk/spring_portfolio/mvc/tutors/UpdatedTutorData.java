@@ -10,9 +10,9 @@ public class UpdatedTutorData extends Tutor {
     private String currentEmail;
 
     // constructor to instantiate updated data
-    public UpdatedTutorData(Long id, String name, String passwordHash, ArrayList<String> experience, int age,
+    public UpdatedTutorData(Long id, String name, String passwordHash, ArrayList<String> experience,
             String email, String meetingpreference, String currentEmail) {
-        super(id, name, passwordHash, experience, age, email, meetingpreference);
+        super(id, name, passwordHash, experience, email, meetingpreference);
         this.currentEmail = currentEmail;
     }
 
