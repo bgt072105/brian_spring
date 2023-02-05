@@ -22,14 +22,14 @@ public class TutorInit {
 
             // 2d array for names and graduating year
             final String[][] peopleArray = {
-                    { "Don Tran", "2024", "donqt15@gmail.com", "858-900-8045" },
-                    { "Krish Patil", "2024", "n/a", "n/a" },
-                    { "Bailey Say", "2024", "n/a", "n/a" },
-                    { "Rohan Gaikwad", "2024", "n/a", "n/a" },
-                    { "Andrew Meng", "2024", "n/a", "n/a" },
-                    { "Nicolas Mounier", "2024", "n/a", "n/a" },
-                    { "Nicholas Ramos", "2024", "n/a", "n/a" },
-                    { "Joe Jack Bill", "2024", "n/a", "n/a" }
+                    { "Don Tran", "19", "donqt15@gmail.com", "online" },
+                    { "Krish Patil", "19", "n/a", "n/a" },
+                    { "Bailey Say", "19", "n/a", "n/a" },
+                    { "Rohan Gaikwad", "19", "n/a", "n/a" },
+                    { "Andrew Meng", "19", "n/a", "n/a" },
+                    { "Nicolas Mounier", "19", "n/a", "n/a" },
+                    { "Nicholas Ramos", "19", "n/a", "n/a" },
+                    { "Joe Jack Bill", "19", "n/a", "n/a" }
             };
 
             // make sure people array database is populated with starting values for members

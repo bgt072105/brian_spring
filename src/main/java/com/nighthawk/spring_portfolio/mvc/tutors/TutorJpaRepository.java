@@ -18,6 +18,9 @@ public interface TutorJpaRepository extends JpaRepository<Tutor, Long> {
     List<Tutor> findByEmailIgnoreCase(String email);
 
     List<Tutor> findByExperience(String experience);
+    
+    List<Tutor> findByAge (int age);
+
 
     Optional<Tutor> findByName(String name);
 }

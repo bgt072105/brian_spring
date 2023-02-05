@@ -29,14 +29,14 @@ public class Tutor {
     // Stores list of events that each student has
     private ArrayList<String> experience = new ArrayList<String>();
 
-    // Stores graduating year
+    // Stores age 
     private int age;
 
     // Stores email
     @Column(nullable = false, unique = true, length = 45)
     private String email;
 
-    // Stores phone number
+    // Stores meeting preference number
     private String meetingpreference;
 
     // delombok: class definition
