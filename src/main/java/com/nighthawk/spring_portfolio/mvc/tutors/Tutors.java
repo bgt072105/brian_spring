@@ -24,7 +24,7 @@ public class Tutors {
     private String reviews;
     private String meetingpreference;
 
-    public String getlocation() {
+    public String getLocation() {
         return this.location;
     }
 
@@ -32,15 +32,15 @@ public class Tutors {
         return this.tutor;
     }
 
-    public String getexperience() {
+    public String getExperience() {
         return this.experience;
     }
 
-    public String getreviews() {
+    public String getReviews() {
         return this.reviews;
     }
 
-    public String getmeetingpreference() {
+    public String getMeetingpreference() {
         return this.meetingpreference;
     }
 
@@ -48,19 +48,19 @@ public class Tutors {
         this.tutor = tutor;
     }
 
-    public void setlocation(String location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public void setexperience(String experience) {
+    public void setExperience(String experience) {
         this.experience = experience;
     }
 
-    public void setreviews(String reviews) {
+    public void setReviews(String reviews) {
         this.reviews = reviews;
     }
 
-    public void setmeetingpreference(String meetingpreference) {
+    public void setMeetingpreference(String meetingpreference) {
         this.meetingpreference = meetingpreference;
     }
 }
