@@ -44,7 +44,7 @@ public class PracticeApiController {
         String Topic = (String) map.get("Topic");
         String Tags = (String) map.get("Tags");
         repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
-        
+        long maxId = repository.getMaxId();
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
     }
@@ -54,26 +54,12 @@ public class PracticeApiController {
      */
     @PutMapping("/jeer/{id}")
     public ResponseEntity<Practice> setJeer(@PathVariable long id) {
-        Optional<Practice> optional = repository.findById(id);
-        if (optional.isPresent()) { // Good ID
-            Practice problems = optional.get();
-            problems.setTopic(problems.getTopic() + 1);
-            repository.save(problems);
-            return new ResponseEntity<>(problems, HttpStatus.OK);
-        }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/share/{id}")
     public ResponseEntity<Practice> setTags(@PathVariable long id) {
-        Optional<Practice> optional = repository.findById(id);
-        if (optional.isPresent()) { // Good ID
-            Practice problems = optional.get();
-            problems.setTags(problems.getTags() + 1);
-            repository.save(problems);
-            return new ResponseEntity<>(problems, HttpStatus.OK);
-        }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
