@@ -1,23 +1,23 @@
-package com.nighthawk.spring_portfolio.mvc.tutors;
+package com.nighthawk.spring_portfolio.mvc.students;
 
 import java.util.ArrayList;
 
 import javax.persistence.Column;
 
-public class UpdatedTutorData extends Tutor {
+public class UpdatedStudentData extends Student {
     // stores current email as reference
     @Column(nullable = false, unique = true, length = 45)
     private String currentEmail;
 
     // constructor to instantiate updated data
-    public UpdatedTutorData(Long id, String name, String passwordHash, ArrayList<String> experience,
-            String email, String meetingpreference, String currentEmail) {
-        super(id, name, passwordHash, experience, email, meetingpreference);
+    public UpdatedStudentData(Long id, String name, String passwordHash, ArrayList<String> event, int graduatingYear,
+            String email, String phoneNumber, String currentEmail) {
+        super(id, name, passwordHash, event, graduatingYear, email, phoneNumber);
         this.currentEmail = currentEmail;
     }
 
     // defines empty constructor from superclass
-    public UpdatedTutorData() {
+    public UpdatedStudentData() {
         super();
     }
 
