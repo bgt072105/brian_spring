@@ -19,6 +19,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /*
 * To enable HTTP Security in Spring, extend the WebSecurityConfigurerAdapter. 
@@ -63,16 +65,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity
 				// We don't need CSRF for this example
 				.csrf().disable()
-				// don't authenticate this particular request
-				.authorizeRequests().antMatchers("/authenticate").permitAll()
-				.antMatchers("/register").permitAll()
-				.antMatchers("/api/**").permitAll()
-				// all other requests need to be authenticated
-				.anyRequest().authenticated().and().
-				// make sure we use stateless session; session won't be used to
-				// store user's state.
-				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+			// support cors on localhost
+			.cors().and()
+			.headers()
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST, GET", "OPTIONS", "HEAD"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept"))
+				.and()
+			// .formLogin()
+      //           .loginPage("/login")
+      //           .and()
+      //       .logout()
+      //           .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+      //           .logoutSuccessUrl("/")
+			// 	.and()
+			// make sure we use stateless session; 
+			// session won't be used to store user's state.
+			.exceptionHandling()
+				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.and()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)           
+		;
+
+				// TODO: in the future add a whitelist of allowed origins; for now permit all
+				// // don't authenticate this particular request
+				// .authorizeRequests().antMatchers("/authenticate").permitAll()
+				// .antMatchers("/register").permitAll()
+				// .antMatchers("/api/**").permitAll()
+				// // all other requests need to be authenticated
+				// .anyRequest().authenticated().and().
+				// // make sure we use stateless session; session won't be used to
+				// // store user's state.
+				// exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+				// .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
