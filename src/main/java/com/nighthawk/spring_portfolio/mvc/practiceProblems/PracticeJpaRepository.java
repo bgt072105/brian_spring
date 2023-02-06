@@ -14,8 +14,6 @@ public interface PracticeJpaRepository extends JpaRepository<Practice, Long> {
 
     List<Practice> findByProblemOrTag(String problem, String tag);
 
-    List<Practice> findById(long id);
-
     @Query(
         value = "SELECT max(id) FROM Practice")
     long getMaxId();

@@ -45,6 +45,11 @@ public class PracticeApiController {
         String Tags = (String) map.get("Tags");
         repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
         long maxId = repository.getMaxId();
+        Optional<Practice> optional = repository.findById(maxId);
+        if (optional.isPresent()) {
+            Practice practice = optional.get();
+            return new ResponseEntity(practice, HttpStatus.OK);
+        }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
     }
