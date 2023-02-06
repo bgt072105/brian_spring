@@ -39,9 +39,9 @@ public class PracticeApiController {
      */
     @PostMapping("/add")
     public ResponseEntity<Practice> addProblem(@RequestParam("question") String problem,
-        @RequestParam("Unit") int Unit,
-        @RequestParam("Topic") String Topic,
-        @RequestParam("Tags") String Tags) {
+            @RequestParam("Unit") int Unit,
+            @RequestParam("Topic") String Topic,
+            @RequestParam("Tags") String Tags) {
         repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Practice> optional = repository.findById(maxId);
