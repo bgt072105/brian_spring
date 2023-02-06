@@ -2,6 +2,7 @@ package com.nighthawk.spring_portfolio.mvc.practiceProblems;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,21 +37,14 @@ public class PracticeApiController {
      * 
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
-    @PutMapping("/like/{id}")
-    public ResponseEntity<Practice> setLike(@PathVariable long id) {
-        /*
-         * Optional (below) is a container object which helps determine if a result is
-         * present.
-         * If a value is present, isPresent() will return true
-         * get() will return the value.
-         */
-        Optional<Practice> optional = repository.findById(id);
-        if (optional.isPresent()) { // Good ID
-            Practice problems = optional.get(); // value from findByID
-            problems.setUnit(problems.getUnit() + 1); // increment value
-            repository.save(problems); // save entity
-            return new ResponseEntity<>(problems, HttpStatus.OK); // OK HTTP response: status code, headers, and body
-        }
+    @PutMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Practice> addProblem(@RequestBody final Map<String, String> map) {
+        String problem = (String) map.get("problem");
+        int Unit = Integer.parseInt(map.get("Unit"));
+        String Topic = (String) map.get("Topic");
+        String Tags = (String) map.get("Tags");
+        repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
+        
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
     }
