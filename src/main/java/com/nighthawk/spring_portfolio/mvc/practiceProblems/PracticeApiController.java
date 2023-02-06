@@ -37,7 +37,7 @@ public class PracticeApiController {
      * 
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
-    @PostMapping(value = "/add")
+    @PostMapping("/add")
     public ResponseEntity<Practice> addProblem(@RequestParam("question") String problem,
         @RequestParam("Unit") int Unit,
         @RequestParam("Topic") String Topic,
@@ -51,6 +51,14 @@ public class PracticeApiController {
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
+    }
+
+    /*
+     * GET individual Person using ID
+     */
+    @GetMapping("/search")
+    public ResponseEntity<List<Practice>> getPerson(@RequestParam("term") String term) {
+        return new ResponseEntity<>(repository.findByProblemOrTag(term), HttpStatus.OK);
     }
 
     /*

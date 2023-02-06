@@ -12,7 +12,10 @@ public interface PracticeJpaRepository extends JpaRepository<Practice, Long> {
     // A
     List<Practice> findByProblemIgnoreCase(String problem);  // look to see if Joke(s) exist
 
-    List<Practice> findByProblemOrTag(String problem, String tag);
+    @Query(
+            value = "SELECT * FROM Practice p WHERE p.problem LIKE ?1 or p.Tags LIKE ?1",
+            nativeQuery = true)
+    List<Practice> findByProblemOrTag(String term);
 
     @Query(
         value = "SELECT max(id) FROM Practice")
