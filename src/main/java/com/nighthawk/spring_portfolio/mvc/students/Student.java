@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.tutors;
+package com.nighthawk.spring_portfolio.mvc.students;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Entity // Annotation to simplify creating an entity, which is a lightweight persistence
         // domain object. Typically, an entity represents a table in a relational
         // database, and each entity instance corresponds to a row in that table.
-@Table(name = "tutors")
-public class Tutor {
+@Table(name = "students")
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,31 +27,34 @@ public class Tutor {
     private String passwordHash;
 
     // Stores list of events that each student has
-    private ArrayList<String> experience = new ArrayList<String>();
+    private ArrayList<String> event = new ArrayList<String>();
+
+    // Stores graduating year
+    private int graduatingYear;
 
     // Stores email
     @Column(nullable = false, unique = true, length = 45)
     private String email;
 
-    // Stores meeting preference number
-    private String meetingpreference;
+    // Stores phone number
+    private String phoneNumber;
 
     // delombok: class definition
-    public Tutor(Long id, String name, String passwordHash, ArrayList<String> experience,
-            String email,
-            String meetingpreference) {
+    public Student(Long id, String name, String passwordHash, ArrayList<String> event,
+            int graduatingYear, String email,
+            String phoneNumber) {
         this.id = id;
         this.name = name;
         this.passwordHash = passwordHash;
-        if (this.experience != null)
-            this.experience = experience;
-
+        if (this.event != null)
+            this.event = event;
+        this.graduatingYear = graduatingYear;
         this.email = email;
-        this.meetingpreference = meetingpreference;
+        this.phoneNumber = phoneNumber;
     }
 
     // no args
-    public Tutor() {
+    public Student() {
     }
 
     // getters and setters
@@ -71,8 +74,8 @@ public class Tutor {
         this.name = name;
     }
 
-    public ArrayList<String> getExperience() {
-        return experience;
+    public ArrayList<String> getEvent() {
+        return event;
     }
 
     public String getPasswordHash() {
@@ -83,23 +86,31 @@ public class Tutor {
         this.passwordHash = passwordHash;
     }
 
-    public boolean doesExperienceExist(String experience) {
-        if (experience.contains(experience))
+    public boolean doesEventExist(String event) {
+        if (event.contains(event))
             return true;
         else
             return false;
     }
 
-    public void setExperience(ArrayList<String> experience) {
-        this.experience = experience;
+    public void setEvent(ArrayList<String> event) {
+        this.event = event;
     }
 
-    public void removeExperience(int index) {
-        this.experience.remove(index);
+    public void removeEvent(int index) {
+        this.event.remove(index);
     }
 
-    public void addExperience(String experience) {
-        this.experience.add(experience);
+    public void addEvent(String event) {
+        this.event.add(event);
+    }
+
+    public int getGraduatingYear() {
+        return graduatingYear;
+    }
+
+    public void setGraduatingYear(int graduatingYear) {
+        this.graduatingYear = graduatingYear;
     }
 
     public String getEmail() {
@@ -110,19 +121,19 @@ public class Tutor {
         this.email = email;
     }
 
-    public String getMeetingpreference() {
-        return meetingpreference;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setMeetingpreference(String meetingpreference) {
-        this.meetingpreference = meetingpreference;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     // data: tostring (not in use)
     @Override
     public String toString() {
-        return "Tutor [id=" + id + ", name=" + name + ",  experience=" + experience
-                + ", email=" + email + ", meetingpreference=" + meetingpreference + "]";
+        return "Student [id=" + id + ", name=" + name + ",  event=" + event
+                + ", graduatingYear=" + graduatingYear + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
     }
 
     // data: check if equal for anything (not in use)
@@ -134,7 +145,7 @@ public class Tutor {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Tutor other = (Tutor) obj;
+        Student other = (Student) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -150,17 +161,19 @@ public class Tutor {
                 return false;
         } else if (!email.equals(other.email))
             return false;
-        if (meetingpreference == null) {
-            if (other.meetingpreference != null)
+        if (phoneNumber == null) {
+            if (other.phoneNumber != null)
                 return false;
-        } else if (!meetingpreference.equals(other.meetingpreference))
+        } else if (!phoneNumber.equals(other.phoneNumber))
             return false;
-        if (experience == null) {
-            if (other.experience != null)
+        if (event == null) {
+            if (other.event != null)
                 return false;
-        } else if (!experience.equals(other.experience))
+        } else if (!event.equals(other.event))
             return false;
-        return false;
+        if (graduatingYear != other.graduatingYear)
+            return false;
+        return true;
     }
 
     // creates hash (not in use)
@@ -170,7 +183,8 @@ public class Tutor {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((experience == null) ? 0 : experience.hashCode());
+        result = prime * result + ((event == null) ? 0 : event.hashCode());
+        result = prime * result + graduatingYear;
         return result;
     }
 }
