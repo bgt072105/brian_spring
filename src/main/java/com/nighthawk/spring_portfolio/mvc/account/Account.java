@@ -1,4 +1,4 @@
-package com.nighthawk.team_backend.mvc.database.account;
+package com.nighthawk.spring_portfolio.mvc.account;
 
 import lombok.*;
 
@@ -8,8 +8,6 @@ import static javax.persistence.FetchType.EAGER;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-
-import com.nighthawk.team_backend.mvc.database.note.Note;
 
 /*
 Person is a POJO, Plain Old Java Object.
