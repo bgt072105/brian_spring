@@ -28,7 +28,7 @@ public class PhysicsApiController {
      * @PutMapping annotation is used for mapping HTTP PUT requests onto specific handler methods.
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
-    @PutMapping("/like/{id}")
+    @PostMapping("/like/{id}")
     public ResponseEntity<Physics> setLike(@PathVariable long id) {
         /* 
         * Optional (below) is a container object which helps determine if a result is present. 
@@ -48,7 +48,7 @@ public class PhysicsApiController {
 
     /* Update Dislike
      */
-    @PutMapping("/dislike/{id}")
+    @PostMapping("/dislike/{id}")
     public ResponseEntity<Physics> setDislike(@PathVariable long id) {
         Optional<Physics> optional = repository.findById(id);
         if (optional.isPresent()) {  // Good ID
