@@ -43,13 +43,4 @@ public class Equation {
         this.text = text;
         this.person = person;
     }
-
-    public void setPersonId(Long id2) {
-        this.person.setId(id2);
-    }
-
-    public void setEquation(String string) {
-        this.text = string;
-    }
-
 }

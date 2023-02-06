@@ -29,9 +29,8 @@ public class EquationInit {
             // Create test note for each person
             List<Person> people = personRepository.findAll();
             for (Person person : people) {
-                Equation equation = new Equation();
-                equation.setPersonId(person.getId());
-                equation.setEquation("E=mc^2");
+                String text = "Equation for " + person.getName();
+                Equation equation = new Equation(text, person);
                 repository.save(equation);
             }
 
