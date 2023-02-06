@@ -37,12 +37,11 @@ public class PracticeApiController {
      * 
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
-    @PutMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Practice> addProblem(@RequestBody final Map<String, String> map) {
-        String problem = (String) map.get("problem");
-        int Unit = Integer.parseInt(map.get("Unit"));
-        String Topic = (String) map.get("Topic");
-        String Tags = (String) map.get("Tags");
+    @PostMapping(value = "/add")
+    public ResponseEntity<Practice> addProblem(@RequestParam("question") String problem,
+        @RequestParam("Unit") int Unit,
+        @RequestParam("Topic") String Topic,
+        @RequestParam("Tags") String Tags) {
         repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Practice> optional = repository.findById(maxId);
