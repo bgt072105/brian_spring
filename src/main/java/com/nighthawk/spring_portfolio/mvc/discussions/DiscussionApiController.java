@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController // annotation to simplify the creation of RESTful web services
-@RequestMapping("/api/tutors") // all requests in file begin with this URI
+@RequestMapping("/api/discussions") // all requests in file begin with this URI
 public class DiscussionApiController {
 
     // Autowired enables Control to connect URI request and POJO Object to easily
