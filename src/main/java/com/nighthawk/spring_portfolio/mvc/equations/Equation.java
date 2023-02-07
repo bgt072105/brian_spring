@@ -30,7 +30,7 @@ public class Equation {
     private Long id;
 
     @NotNull
-    @Column(columnDefinition="TEXT") // Allows for longer strings
+    @Column(columnDefinition = "TEXT") // Allows for longer strings
     private String text;
 
     @ManyToOne

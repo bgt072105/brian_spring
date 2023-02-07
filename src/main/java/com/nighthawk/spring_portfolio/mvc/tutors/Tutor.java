@@ -28,7 +28,7 @@ public class Tutor {
 
     }
 
-    protected Tutor(Long id, String name, String string, ArrayList<String> arrayList, int Age, String Experience,
+    protected Tutor(Long id, String name, int Age, String Experience,
             String Location) {
         if (name == null)
             throw new NullPointerException("name");
@@ -37,9 +37,6 @@ public class Tutor {
         System.out.println(name);
         this.name = name;
         this.Location = Location;
-    }
-
-    public Tutor(Object object, String name2, int age2, String experience2, String location2) {
     }
 
     public String getName() {
