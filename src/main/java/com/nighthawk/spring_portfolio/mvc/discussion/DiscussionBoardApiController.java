@@ -28,7 +28,7 @@ public class DiscussionBoardApiController {
     public ResponseEntity<DiscussionBoard> addQuestion(@RequestParam("Question") String Question,
             @RequestParam("Unit") String Unit,
             @RequestParam("Tags") String Tags) {
-        repository.save(new DiscussionBoard(object: null, Question, Unit, Tags)); // JPA save
+        repository.saveAll(new DiscussionBoard(object: null, Question, Unit, Tags)); // JPA save
         long maxId = repository.getMaxId();
         Optional<DiscussionBoard> optional = repository.findById(maxId);
         if (optional.isPresent()) {
@@ -39,7 +39,7 @@ public class DiscussionBoardApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
     }
 
-   /*
+    /*
      * GET individual Person using ID
      */
     @GetMapping("/search")
