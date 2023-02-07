@@ -1,24 +1,21 @@
 package com.nighthawk.spring_portfolio.mvc.tutors;
 
-import org.codehaus.groovy.transform.TupleConstructorASTTransformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import io.micrometer.core.instrument.internal.TimedExecutorService;
-
 import java.util.*;
 
 @RestController // annotation to simplify the creation of RESTful web services
 @RequestMapping("/api/tutors") // all requests in file begin with this URI
-public class TutorsApiController {
+public class TutorApiController {
 
     // Autowired enables Control to connect URI request and POJO Object to easily
     // for Database CRUD operations
     @Autowired
-    private TutorsJpaRepository repository;
+    private TutorJpaRepository repository;
 
     /*
      * GET List of Jokes
@@ -27,7 +24,7 @@ public class TutorsApiController {
      * handler methods.
      */
     @GetMapping("/")
-    public ResponseEntity<List<Tutors>> getProblems() {
+    public ResponseEntity<List<Tutor>> getNames() {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
@@ -40,33 +37,41 @@ public class TutorsApiController {
      * 
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
-    @PostMapping(value = "/add")
-    public ResponseEntity<TutorsApiController> addProblem(@RequestParam("question") String problem,
-            @RequestParam("Unit") int Unit,
-            @RequestParam("Topic") String Topic,
-            @RequestParam("Tags") String Tags) {
-        repository.save(new Tutors(null, problem, Unit, Topic, Tags)); // JPA save
+    @PostMapping("/add")
+    public ResponseEntity<Tutor> addProblem(@RequestParam("name") String name,
+            @RequestParam("Age") int Age,
+            @RequestParam("Experience") String Experience,
+            @RequestParam("Location") String Location) {
+        repository.save(new Tutor(null, name, Age, Experience, Location)); // JPA save
         long maxId = repository.getMaxId();
-        Optional<Tutors> optional = repository.findById(maxId);
+        Optional<Tutor> optional = repository.findById(maxId);
         if (optional.isPresent()) {
-            Tutors practice = optional.get();
-            return new ResponseEntity(practice, HttpStatus.OK);
+            Tutor tutor = optional.get();
+            return new ResponseEntity(tutor, HttpStatus.OK);
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
     }
 
     /*
+     * GET individual Person using ID
+     */
+    @GetMapping("/search")
+    public ResponseEntity<List<Tutor>> getPerson(@RequestParam("name") String term) {
+        return new ResponseEntity<>(repository.findByNameorLocation(term), HttpStatus.OK);
+    }
+
+    /*
      * Update Jeer
      */
-    @PutMapping("/jeer/{id}")
-    public ResponseEntity<Tutors> setJeer(@PathVariable long id) {
+    @PostMapping("/jeer/{id}")
+    public ResponseEntity<Tutor> setJeer(@PathVariable long id) {
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("/share/{id}")
-    public ResponseEntity<Tutors> setTags(@PathVariable long id) {
+    @PostMapping("/share/{id}")
+    public ResponseEntity<Tutor> setTags(@PathVariable long id) {
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
