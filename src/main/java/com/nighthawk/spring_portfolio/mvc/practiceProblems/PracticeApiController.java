@@ -64,13 +64,13 @@ public class PracticeApiController {
     /*
      * Update Jeer
      */
-    @PutMapping("/jeer/{id}")
+    @PostMapping("/jeer/{id}")
     public ResponseEntity<Practice> setJeer(@PathVariable long id) {
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping("/share/{id}")
+    @PostMapping("/share/{id}")
     public ResponseEntity<Practice> setTags(@PathVariable long id) {
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
