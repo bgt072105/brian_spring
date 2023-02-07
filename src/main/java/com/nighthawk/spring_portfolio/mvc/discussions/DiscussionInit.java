@@ -21,8 +21,8 @@ public class DiscussionInit {
 
             // starting jokes
             final String[] questionsArray = {
-                    "what is life?", "1", "1. newton's laws", "irisyang@gmail.com",
-                    "Ellen", "16", "Tutors in AP STEM subjects", "San Diego"
+                    "How to calculate the force of gravity?", "1", "1.1 newton's laws", "irisyang@gmail.com",
+                    "How is potential energy converted into kinetic energy?", "3", "3.2 potential energy", "physics@student.com"
             };
 
             // make sure Joke database is populated with starting jokes
@@ -30,7 +30,7 @@ public class DiscussionInit {
             for (String questions : questionsArray) {
                 List<Discussion> test = repository.findByQuestionIgnoreCase(questions); // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Discussion(null, questions, 16, "1.1 newton's laws",
+                    repository.save(new Discussion(null, questions, 1, "1.1 newton's laws",
                             "irisyang@gmail.com")); // JPA save
             }
 
