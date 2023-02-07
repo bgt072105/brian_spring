@@ -21,8 +21,8 @@ public class DiscussionBoardInit {
 
             // starting jokes
             final String[] questionArray = {
-                    "What is the formula for calculating kinetic energy?",
-                    "How is kinetic energy converted to potential energy?",
+                    "What is the formula for calculating kinetic energy?", "ahfha", "adkfad", "dsfkas",
+                    "How is kinetic energy converted to potential energy?", "ahfha", "adkfad", "dsfkas",
             };
 
             // make sure Joke database is populated with starting jokes

@@ -2,31 +2,31 @@ package com.nighthawk.spring_portfolio.mvc.discussion;
 
 import javax.persistence.*;
 
-@Entity // Annotation to simplify creating an entity, which is a lightweight persistence domain object. Typically, an entity represents a table in a relational database, and each entity instance corresponds to a row in that table.
+@Entity // Annotation to simplify creating an entity, which is a lightweight persistence
+        // domain object. Typically, an entity represents a table in a relational
+        // database, and each entity instance corresponds to a row in that table.
 public class DiscussionBoard {
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String Question;
-    
+
     @Column
     private String Unit;
 
     @Column
     private String Tags;
 
-    private DiscussionBoard() {   
+    private DiscussionBoard() {
 
     }
 
-    protected DiscussionBoard(Long id, String string, String Question, String Unit, String Tags) {
-        if (Question == null) 
+    protected DiscussionBoard(String string, String Question, String Unit, String Tags) {
+        if (Question == null)
             throw new NullPointerException("Question");
         this.Unit = Unit;
         System.out.println(Question);
         this.Question = Question;
         this.Tags = Tags;
-    }
-    public DiscussionBoard(Object object, String question2, String unit2, String tags2) {
     }
 
     public String getQuestion() {
@@ -46,10 +46,10 @@ public class DiscussionBoard {
     }
 
     public void setUnit(String Unit) {
-        this.Unit=Unit;
+        this.Unit = Unit;
     }
 
     public void setTags(String Tags) {
-        this.Tags=Tags;
+        this.Tags = Tags;
     }
 }
