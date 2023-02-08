@@ -26,6 +26,9 @@ public class EquationInit {
         return args -> {
             // Fail safe data validations
 
+            // Clear repo
+            
+
             // Create test note for each person
             List<Person> people = personRepository.findAll();
             for (Person person : people) {

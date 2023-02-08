@@ -31,12 +31,12 @@ public class EquationApiController {
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 
-    // /*
-    //  * GET individual Person equations using ID
-    //  */
+    /*
+     * GET individual Person equations using ID
+     */
     // @GetMapping("/{id}")
-    // public ResponseEntity<List<Equation>> getEquations(@PathVariable long id) {
-    //     Optional<List<Equation>> optional = repository.findByPersonId(id);
+    // public ResponseEntity<List<Equation>> getEquations(@PathVariable long person_id) {
+    //     Optional<List<Equation>> optional = repository.findAllById(id);
     //     if (optional.isPresent()) { // Good ID
     //         List<Equation> equations = optional.get(); // value from findByID
     //         return new ResponseEntity<>(equations, HttpStatus.OK); // OK HTTP response: status code, headers, and body
