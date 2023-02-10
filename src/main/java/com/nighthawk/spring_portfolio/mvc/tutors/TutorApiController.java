@@ -57,8 +57,8 @@ public class TutorApiController {
      * GET individual Person using ID
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Tutor>> getPerson(@RequestParam("name") String term) {
-        return new ResponseEntity<>(repository.findByNameorLocation(term), HttpStatus.OK);
+    public ResponseEntity<List<Tutor>> getPerson(@RequestParam("name") String name) {
+        return new ResponseEntity<>(repository.findByNameorLocation(name), HttpStatus.OK);
     }
 
     /*

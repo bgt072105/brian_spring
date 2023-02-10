@@ -1,4 +1,3 @@
-
 package com.nighthawk.spring_portfolio.mvc.tutors;
 
 import java.util.List;
@@ -21,21 +20,19 @@ public class TutorInit {
             // Fail safe data validations
 
             // starting jokes
-            final String[] namesArray = {
-                    "Hetvi", "16", "Tutors in STEM subjects", "San Diego",
-                    "Ellen", "16", "Tutors in AP STEM subjects", "San Diego"
+            final String[] tutorsArray = {
+                    "Hetvi",
+                    "Iris",
             };
 
             // make sure Joke database is populated with starting jokes
-
-            for (String names : namesArray) {
+            for (String names : tutorsArray) {
                 List<Tutor> test = repository.findByNameIgnoreCase(names); // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Tutor(null, names, 16, "Tutors in STEM subjects",
-                            "San Diego")); // JPA save
+                    repository.save(new Tutor(null, names, 16, "1.1 Newton's Laws",
+                            "physics, newton's laws, force, mass, acceleration")); // JPA save
             }
 
         };
     }
-
 }
