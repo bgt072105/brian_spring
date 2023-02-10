@@ -46,8 +46,8 @@ public class DiscussionApiController {
         long maxId = repository.getMaxId();
         Optional<Discussion> optional = repository.findById(maxId);
         if (optional.isPresent()) {
-            Discussion question1 = optional.get();
-            return new ResponseEntity(question1, HttpStatus.OK);
+            Discussion question = optional.get();
+            return new ResponseEntity(question, HttpStatus.OK);
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body

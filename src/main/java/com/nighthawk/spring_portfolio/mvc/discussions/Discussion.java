@@ -70,4 +70,5 @@ public class Discussion {
     public void setEmail(String Email) {
         this.Email = Email;
     }
+
 }
