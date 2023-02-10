@@ -71,6 +71,7 @@ public class Discussion {
         this.Email = Email;
     }
 
+    /// Tester Method ToString
     public String toString() {
         return ("{ \"question\": " + this.question + ", " + "\"Tags\": " + this.Tags
                 + ", " + "\"Email\": " + this.Email + "}");
@@ -86,5 +87,3 @@ public class Discussion {
     }
 
 }
-
-

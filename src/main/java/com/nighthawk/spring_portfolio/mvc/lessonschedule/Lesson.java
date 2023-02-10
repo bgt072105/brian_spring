@@ -70,6 +70,7 @@ public class Lesson {
         this.Email = Email;
     }
 
+    /// Tester Method ToString
     public String toString() {
         return ("{ \"name\": " + this.name + ", " + "\"Course\": " + this.Course
                 + ", " + "\"Email\": " + this.Email + "}");
