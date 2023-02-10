@@ -38,7 +38,7 @@ public class TutorApiController {
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
     @PostMapping("/add")
-    public ResponseEntity<Tutor> addProblem(@RequestParam("name") String name,
+    public ResponseEntity<Tutor> addName(@RequestParam("name") String name,
             @RequestParam("Age") int Age,
             @RequestParam("Experience") String Experience,
             @RequestParam("Location") String Location) {
