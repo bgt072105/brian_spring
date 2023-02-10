@@ -1,7 +1,5 @@
 package com.nighthawk.spring_portfolio.mvc.tutors;
 
-import java.util.ArrayList;
-
 import javax.persistence.*;
 
 @Entity // Annotation to simplify creating an entity, which is a lightweight persistence
@@ -13,61 +11,60 @@ public class Tutor {
     private Long id;
 
     @Column(unique = true)
-    private String name;
+    private String teacher;
 
     @Column
-    private int Age;
+    private int Unit;
 
     @Column
-    private String Experience;
+    private String Topic;
 
     @Column
-    private String Location;
+    private String Tags;
 
     private Tutor() {
 
     }
 
-    protected Tutor(Long id, String name, int Age, String Experience,
-            String Location) {
-        if (name == null)
-            throw new NullPointerException("name");
-        this.Age = Age;
-        this.Experience = Experience;
-        System.out.println(name);
-        this.name = name;
-        this.Location = Location;
+    protected Tutor(Long id, String teacher, int Unit, String Topic, String Tags) {
+        if (teacher == null)
+            throw new NullPointerException("teacher");
+        this.Unit = Unit;
+        this.Topic = Topic;
+        System.out.println(teacher);
+        this.teacher = teacher;
+        this.Tags = Tags;
     }
 
-    public String getName() {
-        return this.name;
+    public String getTeacher() {
+        return this.teacher;
     }
 
-    public int getAge() {
-        return this.Age;
+    public int getUnit() {
+        return this.Unit;
     }
 
-    public String getExperience() {
-        return this.Experience;
+    public String getTopic() {
+        return this.Topic;
     }
 
-    public String getLocation() {
-        return this.Location;
+    public String getTags() {
+        return this.Tags;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
     }
 
-    public void setAge(int Age) {
-        this.Age = Age;
+    public void setUnit(int Unit) {
+        this.Unit = Unit;
     }
 
-    public void setExperience(String Experience) {
-        this.Experience = Experience;
+    public void setTopic(String Topic) {
+        this.Topic = Topic;
     }
 
-    public void setLocation(String Location) {
-        this.Location = Location;
+    public void setTags(String Tags) {
+        this.Tags = Tags;
     }
 }
