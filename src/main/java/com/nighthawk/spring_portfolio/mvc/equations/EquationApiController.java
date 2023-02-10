@@ -32,7 +32,7 @@ public class EquationApiController {
     }
 
     /* Post request to add a new equation */
-
+    
     /*
      * GET individual Person equations using ID
      */
