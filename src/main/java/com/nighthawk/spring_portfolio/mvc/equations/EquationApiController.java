@@ -31,6 +31,8 @@ public class EquationApiController {
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 
+    /* Post request to add a new equation */
+
     /*
      * GET individual Person equations using ID
      */

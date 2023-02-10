@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.tutors;
+package com.nighthawk.spring_portfolio.mvc.tutorDatabase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController // annotation to simplify the creation of RESTful web services
-@RequestMapping("/api/tutors") // all requests in file begin with this URI
+@RequestMapping("/api/tutor") // all requests in file begin with this URI
 public class TutorApiController {
 
     // Autowired enables Control to connect URI request and POJO Object to easily
@@ -24,7 +24,7 @@ public class TutorApiController {
      * handler methods.
      */
     @GetMapping("/")
-    public ResponseEntity<List<Tutor>> getNames() {
+    public ResponseEntity<List<Tutor>> getQuestion() {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
@@ -38,16 +38,16 @@ public class TutorApiController {
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
     @PostMapping("/add")
-    public ResponseEntity<Tutor> addName(@RequestParam("name") String name,
-            @RequestParam("Age") int Age,
-            @RequestParam("Experience") String Experience,
-            @RequestParam("Location") String Location) {
-        repository.save(new Tutor(null, name, Age, Experience, Location)); // JPA save
+    public ResponseEntity<Tutor> addQuestion(@RequestParam("question") String question,
+            @RequestParam("Unit") int Unit,
+            @RequestParam("Tags") String Tags,
+            @RequestParam("Email") String Email) {
+        repository.save(new Tutor(null, question, Unit, Tags, Email)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Tutor> optional = repository.findById(maxId);
         if (optional.isPresent()) {
-            Tutor tutor = optional.get();
-            return new ResponseEntity(tutor, HttpStatus.OK);
+            Tutor question1 = optional.get();
+            return new ResponseEntity(question1, HttpStatus.OK);
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
@@ -57,8 +57,8 @@ public class TutorApiController {
      * GET individual Person using ID
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Tutor>> getPerson(@RequestParam("name") String term) {
-        return new ResponseEntity<>(repository.findByNameorLocation(term), HttpStatus.OK);
+    public ResponseEntity<List<Tutor>> getPerson(@RequestParam("question") String term) {
+        return new ResponseEntity<>(repository.findByQuestionorEmail(term), HttpStatus.OK);
     }
 
     /*

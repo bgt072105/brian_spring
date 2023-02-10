@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.discussions;
+package com.nighthawk.spring_portfolio.mvc.tutorDatabase;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity // Annotation to simplify creating an entity, which is a lightweight persistence
         // domain object. Typically, an entity represents a table in a relational
         // database, and each entity instance corresponds to a row in that table.
-public class Discussion {
+public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,11 +24,11 @@ public class Discussion {
     @Column
     private String Email;
 
-    private Discussion() {
+    private Tutor() {
 
     }
 
-    protected Discussion(Long id, String question, int Unit, String Tags,
+    protected Tutor(Long id, String question, int Unit, String Tags,
             String Email) {
         if (question == null)
             throw new NullPointerException("question");
@@ -69,21 +69,6 @@ public class Discussion {
 
     public void setEmail(String Email) {
         this.Email = Email;
-    }
-
-    /// Tester Method ToString
-    public String toString() {
-        return ("{ \"question\": " + this.question + ", " + "\"Tags\": " + this.Tags
-                + ", " + "\"Email\": " + this.Email + "}");
-    }
-
-    public static void main(String[] args) {
-        Discussion newQuestion = new Discussion();
-        newQuestion.setQuestion("What is the formula for calculating kinetic energy?");
-        newQuestion.setTags("physics");
-        newQuestion.setEmail("shriya@gmail.com");
-
-        System.out.println(newQuestion.toString());
     }
 
 }
