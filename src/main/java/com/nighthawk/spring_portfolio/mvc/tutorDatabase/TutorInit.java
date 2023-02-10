@@ -19,19 +19,21 @@ public class TutorInit {
         return args -> {
             // Fail safe data validations
 
+            // clear db
+            repository.deleteAll();
+
             // starting jokes
             final String[] questionsArray = {
-                    "How to calculate the force of gravity?", "1", "1.1 newton's laws", "irisyang@gmail.com",
-                    "How is potential energy converted into kinetic energy?", "3", "3.2 potential energy", "physics@student.com"
+                    "Hetvi",
             };
 
             // make sure Joke database is populated with starting jokes
 
-            for (String questions : questionsArray) {
-                List<Tutor> test = repository.findByQuestionIgnoreCase(questions); // JPA lookup
+            for (String names : questionsArray) {
+                List<Tutor> test = repository.findByNameIgnoreCase(names); // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Tutor(null, questions, 1, "1.1 newton's laws",
-                            "irisyang@gmail.com")); // JPA save
+                    repository.save(new Tutor(null, names, 1, "1.1 newton's laws",
+                            "hetvi@gmail.com")); // JPA save
             }
 
         };

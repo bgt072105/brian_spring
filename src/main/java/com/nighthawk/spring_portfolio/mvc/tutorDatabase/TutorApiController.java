@@ -24,7 +24,7 @@ public class TutorApiController {
      * handler methods.
      */
     @GetMapping("/")
-    public ResponseEntity<List<Tutor>> getQuestion() {
+    public ResponseEntity<List<Tutor>> getName() {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
@@ -38,11 +38,11 @@ public class TutorApiController {
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
     @PostMapping("/add")
-    public ResponseEntity<Tutor> addQuestion(@RequestParam("question") String question,
+    public ResponseEntity<Tutor> addName(@RequestParam("name") String name,
             @RequestParam("Unit") int Unit,
             @RequestParam("Tags") String Tags,
             @RequestParam("Email") String Email) {
-        repository.save(new Tutor(null, question, Unit, Tags, Email)); // JPA save
+        repository.save(new Tutor(null, name, Unit, Tags, Email)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Tutor> optional = repository.findById(maxId);
         if (optional.isPresent()) {
@@ -57,8 +57,8 @@ public class TutorApiController {
      * GET individual Person using ID
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Tutor>> getPerson(@RequestParam("question") String term) {
-        return new ResponseEntity<>(repository.findByQuestionorEmail(term), HttpStatus.OK);
+    public ResponseEntity<List<Tutor>> getPerson(@RequestParam("name") String term) {
+        return new ResponseEntity<>(repository.findByNameorEmail(term), HttpStatus.OK);
     }
 
     /*

@@ -8,13 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 public interface TutorJpaRepository extends JpaRepository<Tutor, Long> {
     // JPA has many built in methods, these few have been prototyped for this
     // application
-    void save(String question);
+    void save(String name);
 
     // A
-    List<Tutor> findByQuestionIgnoreCase(String question); // look to see if Joke(s) exist
+    List<Tutor> findByNameIgnoreCase(String name); // look to see if Joke(s) exist
 
     @Query(value = "SELECT * FROM Practice p WHERE p.problem LIKE ?1 or p.Tags LIKE ?1", nativeQuery = true)
-    List<Tutor> findByQuestionorEmail(String term);
+    List<Tutor> findByNameorEmail(String term);
 
     @Query(value = "SELECT max(id) FROM Practice")
     long getMaxId();
