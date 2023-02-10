@@ -71,4 +71,20 @@ public class Discussion {
         this.Email = Email;
     }
 
+    public String toString() {
+        return ("{ \"question\": " + this.question + ", " + "\"Tags\": " + this.Tags
+                + ", " + "\"Email\": " + this.Email + "}");
+    }
+
+    public static void main(String[] args) {
+        Discussion newQuestion = new Discussion();
+        newQuestion.setQuestion("What is the formula for calculating kinetic energy?");
+        newQuestion.setTags("physics");
+        newQuestion.setEmail("shriya@gmail.com");
+
+        System.out.println(newQuestion.toString());
+    }
+
 }
+
+
