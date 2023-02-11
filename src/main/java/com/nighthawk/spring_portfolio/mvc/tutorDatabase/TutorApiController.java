@@ -40,9 +40,9 @@ public class TutorApiController {
     @PostMapping("/add")
     public ResponseEntity<Tutor> addName(@RequestParam("name") String name,
             @RequestParam("Unit") int Unit,
-            @RequestParam("Tags") String Tags,
+            @RequestParam("Location") String Location,
             @RequestParam("Email") String Email) {
-        repository.save(new Tutor(null, name, Unit, Tags, Email)); // JPA save
+        repository.save(new Tutor(null, name, Unit, Location, Email)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Tutor> optional = repository.findById(maxId);
         if (optional.isPresent()) {

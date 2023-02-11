@@ -19,7 +19,7 @@ public class Tutor {
     private int Unit;
 
     @Column
-    private String Tags;
+    private String Location;
 
     @Column
     private String Email;
@@ -28,12 +28,12 @@ public class Tutor {
 
     }
 
-    protected Tutor(Long id, String name, int Unit, String Tags,
+    protected Tutor(Long id, String name, int Unit, String Location,
             String Email) {
         if (name == null)
             throw new NullPointerException(" name");
         this.Unit = Unit;
-        this.Tags = Tags;
+        this.Location = Location;
         System.out.println(name);
         this.name = name;
         this.Email = Email;
@@ -47,8 +47,8 @@ public class Tutor {
         return this.Unit;
     }
 
-    public String getTags() {
-        return this.Tags;
+    public String getLocation() {
+        return this.Location;
     }
 
     public String getEmail() {
@@ -63,8 +63,8 @@ public class Tutor {
         this.Unit = Unit;
     }
 
-    public void setTags(String Tags) {
-        this.Tags = Tags;
+    public void setLocation(String Location) {
+        this.Location = Location;
     }
 
     public void setEmail(String Email) {

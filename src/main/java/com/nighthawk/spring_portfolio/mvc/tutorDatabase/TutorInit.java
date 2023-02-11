@@ -20,11 +20,17 @@ public class TutorInit {
             // Fail safe data validations
 
             // clear db
-            repository.deleteAll();
+            // repository.deleteAll();
 
             // starting jokes
             final String[] questionsArray = {
-                    "Hetvi",
+                    "Hetvi Trivedi",
+                    "Ellen Xu",
+                    "Brian Tang",
+                    "Iris Yang",
+                    "Bailey Say",
+                    "Mr. Liao",
+                    "Kian Pakoshi",
             };
 
             // make sure Joke database is populated with starting jokes
@@ -32,8 +38,8 @@ public class TutorInit {
             for (String names : questionsArray) {
                 List<Tutor> test = repository.findByNameIgnoreCase(names); // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Tutor(null, names, 1, "1.1 newton's laws",
-                            "hetvi@gmail.com")); // JPA save
+                    repository.save(new Tutor(null, names, 5, "San Diego",
+                            "kian@gmail.com")); // JPA save
             }
 
         };
