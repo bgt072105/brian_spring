@@ -20,7 +20,7 @@ public class TutorInit {
             // Fail safe data validations
 
             // clear db
-            // repository.deleteAll();
+            repository.deleteAll();
 
             // starting jokes
             final String[] questionsArray = {
