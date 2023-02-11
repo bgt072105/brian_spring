@@ -39,7 +39,7 @@ public class TutorInit {
                 List<Tutor> test = repository.findByNameIgnoreCase(names); // JPA lookup
                 if (test.size() == 0)
                     repository.save(new Tutor(null, names, 5, "San Diego",
-                            "kian@gmail.com")); // JPA save
+                            "physicstutors@gmail.com")); // JPA save
             }
 
         };
