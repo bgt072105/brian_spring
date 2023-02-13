@@ -22,18 +22,10 @@ public class TutorsInit {
             // starting jokes
             final String[] tutorsArray = {
 
-                    "E=mc^2",
-                    "F=ma",
-                    "p=mv",
-                    "v=x+at",
-                    "x=1/2at^2",
-                    "v^2=x^2+2xd",
-                    "E=Fd",
-                    "F=kx",
-                    "W=Fd",
-                    "W=1/2kx^2",
-                    "W=1/2mv^2"
-
+                    "Tutor 1",
+                    "Tutor 2",
+                    "Tutor 3",
+                
                     // "If you give someone a program... you will frustrate them for a day; if you
                     // teach them how to program... you will frustrate them for a lifetime.",
                     // "Q: Why did I divide sin by tan? A: Just cos.",
