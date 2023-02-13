@@ -37,29 +37,34 @@ public class EquationApiController {
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 
-    /* Post request to add a new equation */
-    @PostMapping("/add")
-    public ResponseEntity<Equation> addEquation(@RequestParam("person_id") int person_id, @RequestParam("text") String text) {
-        Person person = personRepository.getPersonById(person_id);
-        Equation equation = new Equation(text, person);
-        repository.save(equation);
-        return new ResponseEntity<>(equation, HttpStatus.OK);  // OK HTTP response: status code, headers, and body
-    }
-
-
     /*
      * GET individual Person equations using ID
      */
-    // @GetMapping("/{id}")
-    // public ResponseEntity<List<Equation>> getEquations(@PathVariable long person_id) {
-    //     Optional<List<Equation>> optional = repository.findAllById(id);
-    //     if (optional.isPresent()) { // Good ID
-    //         List<Equation> equations = optional.get(); // value from findByID
-    //         return new ResponseEntity<>(equations, HttpStatus.OK); // OK HTTP response: status code, headers, and body
-    //     }
-    //     // Bad ID
-    //     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    // }
+    @GetMapping("/{person_id}")
+    public ResponseEntity<List<Equation>> getEquations(@PathVariable long person_id) {
+        Optional<List<Equation>> optional = repository.findAllById(person_id);
+        if (optional.isPresent()) { // Good ID
+            List<Equation> equations = optional.get(); // value from findByID
+            return new ResponseEntity<>(equations, HttpStatus.OK); // OK HTTP response: status code, headers, and body
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 
     // CRUD operations
+    /* Post request to add a new equation */
+    @PostMapping("/create")
+    public ResponseEntity<Equation> addEquation(@RequestParam("person_id") long person_id, @RequestParam("text") String text) {
+        Optional<Person> optional = personRepository.findById(person_id);
+
+        if (optional.isPresent()) { // Good ID
+            Person person = optional.get(); // value from findByID
+            Equation equation = new Equation(text, person);
+            repository.save(equation);
+            return new ResponseEntity<>(equation, HttpStatus.OK); // OK HTTP response: status code, headers, and body
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 }
