@@ -30,14 +30,14 @@ public class EquationInit {
             // repository.deleteAll();
 
             // Create test note for each person if not already created
-            if (repository.count() == 0) {
-                List<Person> people = personRepository.findAll();
-                for (Person person : people) {
-                    String text = "Equation for " + person.getName();
-                    Equation equation = new Equation(text, person);
-                    repository.save(equation);
-                }
+            // if (repository.count() == 0) {
+            List<Person> people = personRepository.findAll();
+            for (Person person : people) {
+                String text = "Equation for " + person.getName();
+                Equation equation = new Equation(text, person);
+                repository.save(equation);
             }
+            // }
         };
     }
 }
