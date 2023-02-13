@@ -27,16 +27,17 @@ public class EquationInit {
             // Fail safe data validations
 
             // Clear repo
-            
+            // repository.deleteAll();
 
-            // Create test note for each person
-            List<Person> people = personRepository.findAll();
-            for (Person person : people) {
-                String text = "Equation for " + person.getName();
-                Equation equation = new Equation(text, person);
-                repository.save(equation);
+            // Create test note for each person if not already created
+            if (repository.count() == 0) {
+                List<Person> people = personRepository.findAll();
+                for (Person person : people) {
+                    String text = "Equation for " + person.getName();
+                    Equation equation = new Equation(text, person);
+                    repository.save(equation);
+                }
             }
-
         };
     }
 }
