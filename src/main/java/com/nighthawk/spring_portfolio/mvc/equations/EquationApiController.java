@@ -34,6 +34,7 @@ public class EquationApiController {
     @GetMapping("/")
     public ResponseEntity<List<Equation>> getEquations() {
         // ResponseEntity returns List of Equations provide by JPA findAll()
+        // TODO: include foreign key person_id
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 
@@ -42,7 +43,7 @@ public class EquationApiController {
      */
     @GetMapping("/{person_id}")
     public ResponseEntity<List<Equation>> getEquations(@PathVariable long person_id) {
-        Optional<List<Equation>> optional = repository.findAllById(person_id);
+        Optional<List<Equation>> optional = repository.findByPersonId(person_id);
         if (optional.isPresent()) { // Good ID
             List<Equation> equations = optional.get(); // value from findByID
             return new ResponseEntity<>(equations, HttpStatus.OK); // OK HTTP response: status code, headers, and body
@@ -54,14 +55,30 @@ public class EquationApiController {
     // CRUD operations
     /* Post request to add a new equation */
     @PostMapping("/create")
-    public ResponseEntity<Equation> addEquation(@RequestParam("person_id") long person_id, @RequestParam("text") String text) {
+    public ResponseEntity<Object> addEquation(@RequestParam("person_id") long person_id, @RequestParam("text") String text) {
         Optional<Person> optional = personRepository.findById(person_id);
 
         if (optional.isPresent()) { // Good ID
             Person person = optional.get(); // value from findByID
             Equation equation = new Equation(text, person);
             repository.save(equation);
-            return new ResponseEntity<>(equation, HttpStatus.OK); // OK HTTP response: status code, headers, and body
+            return new ResponseEntity<>(equation + " is created successfully", HttpStatus.OK); // OK HTTP response: status code, headers, and body
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/delete/{person_id}/{id}")
+    public ResponseEntity<Equation> deleteEquation(@PathVariable long person_id, @PathVariable long id) {
+        Optional<Equation> optional = repository.findById(id);
+        if (optional.isPresent()) { // Good ID
+            // only allow to delete if the equation belongs to the person
+            if (optional.get().getPerson().getId() == person_id) {
+                Equation equation = optional.get(); // value from findByID
+                repository.deleteById(id); // value from findByID
+                return new ResponseEntity<>(equation, HttpStatus.OK); // OK HTTP response: status code, headers, and body
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

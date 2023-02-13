@@ -15,7 +15,7 @@ public class TutorsInit {
     TutorsJpaRepository repository;
 
     @Bean
-    CommandLineRunner run() { // The run() method will be executed after the application starts
+    CommandLineRunner runTutors() { // The run() method will be executed after the application starts
         return args -> {
             // Fail safe data validations
 
