@@ -18,12 +18,11 @@ public class TutInit {
     CommandLineRunner runTut() { // The run() method will be executed after the application starts
         return args -> {
             // Fail safe data validations
-
             // starting jokes
             final String[] namesArray = {
                     "Ellen",
                     "Hetvi",
-                    "Brian",
+                    "Brian"
 
             };
 
@@ -33,7 +32,7 @@ public class TutInit {
                 List<Tut> test = repository.findByTutornameIgnoreCase(tutornames); // JPA lookup
                 if (test.size() == 0)
                     repository.save(new Tut(null, tutornames, 16, "San Diego",
-                            "bgtrocks@gmail.com")); // JPA save
+                            "briantang@gmail.com")); // JPA save
             }
 
         };
