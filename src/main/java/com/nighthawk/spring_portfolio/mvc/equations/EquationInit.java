@@ -16,7 +16,7 @@ public class EquationInit {
 
     // Inject repositories
     @Autowired
-    EquationJpaRepository repository;
+    EquationJpaRepository equationRepository;
 
     @Autowired
     PersonJpaRepository personRepository;
@@ -30,14 +30,14 @@ public class EquationInit {
             // repository.deleteAll();
 
             // Create test note for each person if not already created
-            // if (repository.count() == 0) {
-            // List<Person> people = personRepository.findAll();
-            // for (Person person : people) {
-            //     String text = "Equation for " + person.getName();
-            //     Equation equation = new Equation(text, person);
-            //     repository.save(equation);
-            // }
-            // }
+            List<Person> people = personRepository.findAll();
+            for (Person person : people) {
+                if (equationRepository.findByPersonId(person.getId()).isEmpty()) {
+                    String text = "Example equation for " + person.getName();
+                    Equation equation = new Equation(text, person);
+                    equationRepository.save(equation);
+                }
+            }
         };
     }
 }
