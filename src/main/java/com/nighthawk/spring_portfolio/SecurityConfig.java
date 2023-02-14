@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.security;
+package com.nighthawk.spring_portfolio;
 
 import com.nighthawk.spring_portfolio.mvc.jwt.*;
 
