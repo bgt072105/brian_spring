@@ -55,14 +55,15 @@ public class EquationApiController {
     // CRUD operations
     /* Post request to add a new equation */
     @PostMapping("/create")
-    public ResponseEntity<Object> addEquation(@RequestParam("person_id") long person_id, @RequestParam("text") String text) {
+    public ResponseEntity<Equation> addEquation(@RequestParam("person_id") long person_id, @RequestParam("text") String text) {
         Optional<Person> optional = personRepository.findById(person_id);
 
         if (optional.isPresent()) { // Good ID
             Person person = optional.get(); // value from findByID
             Equation equation = new Equation(text, person);
             repository.save(equation);
-            return new ResponseEntity<>(equation + " is created successfully", HttpStatus.OK); // OK HTTP response: status code, headers, and body
+            // return response in json format
+            return new ResponseEntity<>(equation, HttpStatus.OK);
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
