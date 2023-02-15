@@ -49,10 +49,11 @@ public class JwtApiController {
 		.loadUserByUsername(authenticationRequest.getEmail());
 		final String token = jwtTokenUtil.generateToken(userDetails);
 		final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
-		.httpOnly(true)
+		.httpOnly(false)
 		.secure(true)
 		.path("/")
 		.maxAge(3600)
+		.sameSite("none")
 		// .domain("example.com") // Set to backend domain
 		.build();
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
