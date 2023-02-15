@@ -78,9 +78,9 @@ public class Lesson {
 
     public static void main(String[] args) {
         Lesson newLesson = new Lesson();
-        newLesson.setName("Shriya");
+        newLesson.setName("Lesson");
         newLesson.setCourse("E&M");
-        newLesson.setEmail("shriya@gmail.com");
+        newLesson.setEmail("lesson@gmail.com");
 
         System.out.println(newLesson.toString());
     }
