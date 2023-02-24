@@ -16,27 +16,27 @@ public class Discussion {
     private String question;
 
     @Column
-    private int Unit;
+    private int unit;
 
     @Column
-    private String Tags;
+    private String tags;
 
     @Column
-    private String Email;
+    private String email;
 
     private Discussion() {
 
     }
 
-    protected Discussion(Long id, String question, int Unit, String Tags,
-            String Email) {
+    protected Discussion(Long id, String question, int unit, String tags,
+            String email) {
         if (question == null)
             throw new NullPointerException("question");
-        this.Unit = Unit;
-        this.Tags = Tags;
+        this.unit = unit;
+        this.tags = tags;
         System.out.println(question);
         this.question = question;
-        this.Email = Email;
+        this.email = email;
     }
 
     public String getQuestion() {
@@ -44,37 +44,37 @@ public class Discussion {
     }
 
     public int getUnit() {
-        return this.Unit;
+        return this.unit;
     }
 
     public String getTags() {
-        return this.Tags;
+        return this.tags;
     }
 
     public String getEmail() {
-        return this.Email;
+        return this.email;
     }
 
     public void setQuestion(String question) {
         this.question = question;
     }
 
-    public void setUnit(int Unit) {
-        this.Unit = Unit;
+    public void setUnit(int unit) {
+        this.unit = unit;
     }
 
-    public void setTags(String Tags) {
-        this.Tags = Tags;
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /// Tester Method ToString
     public String toString() {
-        return ("{ \"question\": " + this.question + ", " + "\"Tags\": " + this.Tags
-                + ", " + "\"Email\": " + this.Email + "}");
+        return ("{ \"question\": " + this.question + ", " + "\"tags\": " + this.tags
+                + ", " + "\"email\": " + this.email + "}");
     }
 
     public static void main(String[] args) {

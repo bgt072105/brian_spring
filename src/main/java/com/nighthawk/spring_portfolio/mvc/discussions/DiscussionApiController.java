@@ -39,10 +39,10 @@ public class DiscussionApiController {
      */
     @PostMapping("/add")
     public ResponseEntity<Discussion> addQuestion(@RequestParam("question") String question,
-            @RequestParam("Unit") int Unit,
-            @RequestParam("Tags") String Tags,
-            @RequestParam("Email") String Email) {
-        repository.save(new Discussion(null, question, Unit, Tags, Email)); // JPA save
+            @RequestParam("unit") int unit,
+            @RequestParam("tags") String tags,
+            @RequestParam("email") String email) {
+        repository.save(new Discussion(null, question, unit, tags, email)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Discussion> optional = repository.findById(maxId);
         if (optional.isPresent()) {
