@@ -60,19 +60,4 @@ public class PracticeApiController {
     public ResponseEntity<List<Practice>> getPerson(@RequestParam("term") String term) {
         return new ResponseEntity<>(repository.findByProblemOrTag(term), HttpStatus.OK);
     }
-
-    /*
-     * Update Jeer
-     */
-    @PostMapping("/jeer/{id}")
-    public ResponseEntity<Practice> setJeer(@PathVariable long id) {
-        // Bad ID
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    @PostMapping("/share/{id}")
-    public ResponseEntity<Practice> setTags(@PathVariable long id) {
-        // Bad ID
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
 }
