@@ -153,14 +153,17 @@ public class PersonApiController {
     }
 
     @GetMapping("/getPersonName")
-        public ResponseEntity<?> getPersonName(@RequestParam("email") String email) {
+        public ResponseEntity<?> getPersonNameAndId(@RequestParam("email") String email) {
             Person person = repository.findByEmail(email);
-            return new ResponseEntity<>(person.getName(), HttpStatus.OK);
+            Map<String, String> map = new HashMap<>();
+            map.put("name", person.getName());
+            map.put("id", Long.toString(person.getId()));
+            return new ResponseEntity<>(map, HttpStatus.OK);
         }
-    @GetMapping("/getPersonId")
-        public ResponseEntity<?> getPersonId(@RequestParam("email") String email) {
-            Person person = repository.findByEmail(email);
-            return new ResponseEntity<>(person.getId(), HttpStatus.OK);
-        }
+    // @GetMapping("/getPersonId")
+    //     public ResponseEntity<?> getPersonId(@RequestParam("email") String email) {
+    //         Person person = repository.findByEmail(email);
+    //         return new ResponseEntity<>(person.getId(), HttpStatus.OK);
+    //     }
 
 }
