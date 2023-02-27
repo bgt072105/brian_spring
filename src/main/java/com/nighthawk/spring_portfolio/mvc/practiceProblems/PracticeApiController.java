@@ -64,7 +64,7 @@ public class PracticeApiController {
     /*
      * GET individual Person using ID
      */
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<List<Practice>> getPerson(@RequestBody final String stringifiedJson) {
         try {
             Map<String,String> json = new ObjectMapper().readValue(stringifiedJson, Map.class);
