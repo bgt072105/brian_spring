@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf().disable()
 
 			// support cors on localhost
-			.cors().and()
+			// .cors().and()
 			.headers()
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
         .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-ExposedHeaders", "*", "Authorization"))
@@ -76,13 +76,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST", "GET", "OPTIONS", "HEAD"))
         // .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://hetvit27.github.io/"))
 				.and()
-			// .formLogin()
-      //           .loginPage("/login")
-      //           .and()
-      //       .logout()
-      //           .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-      //           .logoutSuccessUrl("/")
-			// 	.and()
+			.formLogin()
+                .loginPage("/login")
+                .and()
+            .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+				.and()
 			// make sure we use stateless session; 
 			// session won't be used to store user's state.
 			.exceptionHandling()
