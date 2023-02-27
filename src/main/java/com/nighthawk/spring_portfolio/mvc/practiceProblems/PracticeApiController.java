@@ -38,10 +38,11 @@ public class PracticeApiController {
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
     @PostMapping("/add")
-    public ResponseEntity<Practice> addProblem(@RequestParam("question") String problem,
-            @RequestParam("Unit") int Unit,
-            @RequestParam("Topic") String Topic,
-            @RequestParam("Tags") String Tags) {
+    public ResponseEntity<Practice> addProblem(@RequestBody final Map<String, String> json){
+        String problem = json.get("problem");
+        int Unit = Integer.parseInt(json.get("Unit"));
+        String Topic = json.get("Topic");
+        String Tags = json.get("Tags");
         repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Practice> optional = repository.findById(maxId);
