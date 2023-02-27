@@ -6,6 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.*;
 
 @RestController // annotation to simplify the creation of RESTful web services
@@ -38,17 +40,22 @@ public class PracticeApiController {
      * @PathVariable annotation extracts the templated part {id}, from the URI
      */
     @PostMapping("/add")
-    public ResponseEntity<Practice> addProblem(@RequestBody final Map<String, String> json){
-        String problem = json.get("problem");
-        int Unit = Integer.parseInt(json.get("Unit"));
-        String Topic = json.get("Topic");
-        String Tags = json.get("Tags");
-        repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
-        long maxId = repository.getMaxId();
-        Optional<Practice> optional = repository.findById(maxId);
-        if (optional.isPresent()) {
-            Practice practice = optional.get();
-            return new ResponseEntity(practice, HttpStatus.OK);
+    public ResponseEntity<Practice> addProblem(@RequestBody final String stringifiedJson){
+        try{
+            Map<String,String> json = new ObjectMapper().readValue(stringifiedJson, Map.class);
+            String problem = json.get("problem");
+            int Unit = Integer.parseInt(json.get("Unit"));
+            String Topic = json.get("Topic");
+            String Tags = json.get("Tags");
+            repository.save(new Practice(null, problem, Unit, Topic, Tags)); // JPA save
+            long maxId = repository.getMaxId();
+            Optional<Practice> optional = repository.findById(maxId);
+            if (optional.isPresent()) {
+                Practice practice = optional.get();
+                return new ResponseEntity(practice, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+
         }
         // Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Failed HTTP response: status code, headers, and body
