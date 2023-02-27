@@ -85,4 +85,21 @@ public class EquationApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @PostMapping("/update/{person_id}/{id}")
+    public ResponseEntity<Equation> updateEquation(@PathVariable long person_id, @PathVariable long id, @RequestParam("text") String text) {
+        Optional<Equation> optional = repository.findById(id);
+        if (optional.isPresent()) { // Good ID
+            // only allow to delete if the equation belongs to the person
+            if (optional.get().getPerson().getId() == person_id) {
+                Equation equation = optional.get(); // value from findByID
+                equation.setText(text);
+                repository.save(equation);
+                return new ResponseEntity<>(equation, HttpStatus.OK); // OK HTTP response: status code, headers, and body
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 }
