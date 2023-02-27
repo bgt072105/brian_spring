@@ -157,5 +157,10 @@ public class PersonApiController {
             Person person = repository.findByEmail(email);
             return new ResponseEntity<>(person.getName(), HttpStatus.OK);
         }
+    @GetMapping("/getPersonId")
+        public ResponseEntity<?> getPersonId(@RequestParam("email") String email) {
+            Person person = repository.findByEmail(email);
+            return new ResponseEntity<>(person.getId(), HttpStatus.OK);
+        }
 
 }
