@@ -65,7 +65,14 @@ public class PracticeApiController {
      * GET individual Person using ID
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Practice>> getPerson(@RequestParam("term") String term) {
-        return new ResponseEntity<>(repository.findByProblemOrTag(term), HttpStatus.OK);
+    public ResponseEntity<List<Practice>> getPerson(@RequestBody final String stringifiedJson) {
+        try {
+            Map<String,String> json = new ObjectMapper().readValue(stringifiedJson, Map.class);
+            String term = json.get("term");
+            return new ResponseEntity<>(repository.findByProblemOrTag(term), HttpStatus.OK);
+        } catch (Exception e) {
+
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
     }
 }
