@@ -65,6 +65,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity
 				// We don't need CSRF for this example
 				.csrf().disable()
+				// TODO: in the future add a whitelist of allowed origins; for now permit all
+				// don't authenticate this particular request
+				.authorizeRequests().antMatchers("/authenticate").permitAll() // allow all to authenticate
+				.and()
+				// .antMatchers("/register").permitAll()
+				// .antMatchers("/api/**").permitAll()
+				// // all other requests need to be authenticated
+				// .anyRequest().authenticated().and().
+				// // make sure we use stateless session; session won't be used to
+				// // store user's state.
+				// exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+				// .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 			// support cors on localhost
 			// .cors().and()
@@ -92,17 +104,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)           
 		;
 
-				// TODO: in the future add a whitelist of allowed origins; for now permit all
-				// // don't authenticate this particular request
-				// .authorizeRequests().antMatchers("/authenticate").permitAll()
-				// .antMatchers("/register").permitAll()
-				// .antMatchers("/api/**").permitAll()
-				// // all other requests need to be authenticated
-				// .anyRequest().authenticated().and().
-				// // make sure we use stateless session; session won't be used to
-				// // store user's state.
-				// exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-				// .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
