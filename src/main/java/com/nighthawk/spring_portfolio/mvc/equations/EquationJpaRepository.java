@@ -20,4 +20,6 @@ public interface EquationJpaRepository extends JpaRepository<Equation, Long> {
     Optional<List<Equation>> findAllById(long id); // Find all equations by id
 
     Optional<List<Equation>> findByPersonId(long person_id); // Find all equations by person id
+
+    Optional<List<Equation>> findByPersonIdAndTextContaining(long person_id, String text);
 }

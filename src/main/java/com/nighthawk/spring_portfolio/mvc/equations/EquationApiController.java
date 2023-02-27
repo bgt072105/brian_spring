@@ -102,4 +102,14 @@ public class EquationApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+        @PostMapping("/search/{person_id}")
+    public ResponseEntity<List<Equation>> searchEquation(@PathVariable long person_id, @RequestParam("text") String text) {
+        Optional<List<Equation>> optional = repository.findByPersonIdAndTextContaining(person_id, text);
+        if (optional.isPresent()) { // Good ID
+            List<Equation> equations = optional.get(); // value from findByID
+            return new ResponseEntity<>(equations, HttpStatus.OK); // OK HTTP response: status code, headers, and body
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }
