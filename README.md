@@ -1,28 +1,25 @@
-## TBD [Spring Portfolio Starter](https://nighthawkcodingsociety.com/projectsearch/details/Spring%20Portfolio%20Starter)
-Runtime link: TBD https://jportfolio.nighthawkcodingsociety.com/
+# Team 9: KEBHI Physics Website
 
+KEBHI Physics is a well-rounded platform meant to serve Del Norte Physics students to connect with tutors and one another
 
+Why: AP Physics is a hard class. We all struggled through the class during junior and senior year. We wanted to make a website to help make the class easier to navigate.
 
-## Visual thoughts
-#### * Starter code should be fun and practical
-#### * Organize with Bootstrap menu 
-#### * Add some color and fun through VANTA Visuals (birds, halo, solar, net)
-#### * Show some practical and fun links (hrefs) like Twitter, Git, Youtube
-#### * Show student project specific links (hrefs) per page
-#### * Show student TPT ideas
-#### * Show student About me pages
+What: Our website includes notes from the different units in one centralized location. In addition, we have lab simulations to better help students understand the concepts. Our features include a tutor database to help students receive more individualized help, an equation database to store equations from different units, a practice problem database to get more practice for each unit, and a discussion board to ask fellow students and tutors questions and receive quick held.
 
+Features: 
+- Discussion board 
+- Equations page to store the equations you've learned
+- Practice problems with units and tags to help study
+- Tutors page to find and add any tutors you know
+- Equation leaderboard to like and dislike any equations you find during your study
+- Secure signup and login system that allows for secure information 
 
+### Frontpage
 
-## Getting started
-#### * Clone project to IntelliJ
-#### * Verify Project Structure to use a good Java JDK (adopt-openJ9-15) 
-#### * Play or entry point is Main.java, look for play option in tray.  This file eanbles Spring to load
-#### * Java source (src/main/java) had Java files.  Find "controllers" path, these files enable HTTP route and HTML file relationship.  Note, html 
-#### * HTML source (src/main/resources) had templates and supporting files.  Find index.html as this file is launched by defaul in Spring.  Other HTML files are loaded by building a "@Controller"
+![Frontpage](frontpage.png)
 
+### Login page
+![Login Page](loginpage.png)
 
-
-## IDE management
-#### * A ".gitignore" can teach a Developer a lot about Java runtime.  A target directory is created when you press play button, byte code is generated and files are moved into this location.
-#### * A "pom.xml" file can teach you a lot about Java dependencies.  This is similar to "requirements.txt" file in Python.  It manages packages and dependencies.
+### Sample feature
+![Equations](feature1.png)
