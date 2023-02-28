@@ -87,4 +87,25 @@ public class ScheduleApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @PostMapping("/update/{person_id}/{id}")
+    public ResponseEntity<Schedule> updateSchedule(@PathVariable long person_id, @PathVariable long id,
+            @RequestParam("classname") String classname,
+            @RequestParam("period") String period) {
+        Optional<Schedule> optional = repository.findById(id);
+        if (optional.isPresent()) { // Good ID
+            // only allow to delete if the equation belongs to the person
+            if (optional.get().getPerson().getId() == person_id) {
+                Schedule schedule = optional.get(); // value from findByID
+                schedule.setClassname(classname);
+                schedule.setPeriod(period);
+                repository.save(schedule);
+                return new ResponseEntity<>(schedule, HttpStatus.OK); // OK HTTP response: status code, headers, and
+                                                                      // body
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        // Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 }
