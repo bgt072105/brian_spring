@@ -40,9 +40,9 @@ public class LessonApiController {
     @PostMapping("/add")
     public ResponseEntity<Lesson> addName(@RequestParam("name") String name,
             @RequestParam("Grade") int Grade,
-            @RequestParam("Class") String Class,
+            @RequestParam("Course") String Course,
             @RequestParam("Email") String Email) {
-        repository.save(new Lesson(null, name, Grade, Class, Email)); // JPA save
+        repository.save(new Lesson(null, name, Grade, Course, Email)); // JPA save
         long maxId = repository.getMaxId();
         Optional<Lesson> optional = repository.findById(maxId);
         if (optional.isPresent()) {
