@@ -31,7 +31,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+			throws ServletException, IOException {
 
 		final Cookie[] cookies = request.getCookies();
 		String username = null;
@@ -40,7 +41,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		if ((cookies == null) || (cookies.length == 0)) {
 			logger.warn("No cookies");
 		} else {
-			for (Cookie cookie: cookies) {
+			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("jwt")) {
 					jwtToken = cookie.getValue();
 				}
@@ -71,8 +72,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			// authentication
 			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
-				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+						userDetails, null, userDetails.getAuthorities());
+				usernamePasswordAuthenticationToken
+						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				// After setting the Authentication in the context, we specify
 				// that the current user is authenticated. So it passes the
 				// Spring Security Configurations successfully.
